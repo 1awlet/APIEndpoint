@@ -76,3 +76,5 @@
 /Users/zeinababubakar/Desktop/DotNet/Reactivities/API/bin/Debug/net7.0/MediatR.dll
 /Users/zeinababubakar/Desktop/DotNet/Reactivities/API/bin/Debug/net7.0/MediatR.Contracts.dll
 /Users/zeinababubakar/Desktop/DotNet/Reactivities/API/bin/Debug/net7.0/MediatR.Extensions.Microsoft.DependencyInjection.dll
+/Users/zeinababubakar/Desktop/DotNet/Reactivities/API/bin/Debug/net7.0/AutoMapper.dll
+/Users/zeinababubakar/Desktop/DotNet/Reactivities/API/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

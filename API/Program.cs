@@ -1,7 +1,9 @@
 using Application.ActivitiesProvider;
+using Application.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -35,6 +37,10 @@ builder.Services.AddCors(opt =>
 
 
 builder.Services.AddMediatR(typeof(getList.Handler));
+
+//builder.Services.AddAutoMapper(typeof )
+builder.Services.AddAutoMapper(typeof(MappingFIelds).Assembly);
+
 
 var app = builder.Build();
 
