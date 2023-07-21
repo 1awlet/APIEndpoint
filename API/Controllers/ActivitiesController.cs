@@ -48,4 +48,11 @@ namespace API.Controllers
 
     }
 
+
+     [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateActivity(Guid id,Activity activity){
+        activity.Id=id;
+
+        return Ok(await Mediator.Send(new UpdateActivity.Command{Activity= activity}));
+    }
 }}
