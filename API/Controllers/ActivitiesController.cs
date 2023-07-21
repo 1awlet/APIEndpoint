@@ -1,5 +1,7 @@
 
+using Application.ActivitiesProvider;
 using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -11,19 +13,27 @@ namespace API.Controllers
   
        
   
-        private readonly DataContext _context;
+     //   private readonly DataContext _context;
      
     
-        public ActivitiesController(DataContext context){
+     /*  public ActivitiesController(DataContext context){
             _context = context;
-        }
+        }*/
+        private readonly IMediator _mediator;
+
+    public ActivitiesController (IMediator mediator){
+            _mediator = mediator;
+
+        
+    }
         
    //For someone to reach this end point they will have 
    // to specify this url
     [HttpGet] //ap/activities
     public async Task<ActionResult<List<Activity>>> GetActivities (){
 
-        return await _context.Activities.ToListAsync();
+        //Use the List we get from Application
+        return await _mediator.Send(new getList.Query() );
     }
 
  
@@ -32,7 +42,7 @@ namespace API.Controllers
     public async Task<ActionResult<Activity>> GetActivity(Guid id)
     {
 
-        return  await _context.Activities.FindAsync(id);
+        return  Ok();
 
     }
     
