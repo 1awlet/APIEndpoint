@@ -18,7 +18,7 @@ const Navbar = ()=>{
       <ul className="navbar-menu">
         <li>Home</li>
         <li>About</li>
-        <li className="libtns"> Add and Activity </li>
+        <li className="libtns"> Add Activity </li>
       </ul>
     </nav>
         </>
