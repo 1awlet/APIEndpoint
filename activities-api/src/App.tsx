@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-
+import Navbar from './Routes/Nav-Bar/navbar';
 
 export type Activity= {
   id:string,
@@ -16,17 +16,17 @@ export type Activity= {
 function App() {
   const [activities, setactivities]= useState<Activity[]>([]);
 
-  const [filteredData, setFilteredData] = useState<Activity[]>(activities);
+  const [filteredData, setFilteredData] = useState(activities);
   const [userInput,setUserInput]= useState("");
 
   useEffect(()=>{
-   axios.get("http://localhost:5100/api/activities").then((res)=> {
+   /*axios.get<Activity[]>("http://localhost:5100/api/activities").then((res)=> {
     setactivities(res.data)
     
-   } 
-   )
+   }
+   ) */
   },[])
-console.log(filteredData)
+
   const searchHandlar = (event:any)=>{
     const value= event.target.value;
 
@@ -47,6 +47,7 @@ console.log(filteredData)
 
   return (
     <div className="App">
+      <Navbar />
       <div>
         <div  className='SearchBar'>
       <h3>Search for activity</h3>

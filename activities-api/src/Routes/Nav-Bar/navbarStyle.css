@@ -1,0 +1,70 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: white;
+    border-bottom: 2px solid black;
+    color: black;
+    position: relative;
+    transition: right 0.3s ease-in-out;
+
+    height: 20px;
+  }
+  .navbar.open {
+    right: 0;
+  }
+
+  
+  .hamburger {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: none; /* Hide the hamburger and close icons on larger screens */
+  }
+  
+  .navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 50px;
+    font-size: 1.2rem;
+    border: 1px solid red;
+  }
+.libtns{
+  border: 1px solid black;
+
+}
+
+  /* Add media query for smaller screens */
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+  
+    
+    .navbar-menu {
+      flex-direction: column;
+      position: absolute;
+      right: -110%;
+      top: 100%;
+ 
+    background-color: white;
+      width: 100%;
+      font-size: 1.43rem;
+      padding: 1rem;
+      transition: right 0.3s ease-in-out;
+    }
+  
+    .navbar.open .navbar-menu {
+      right: 0;
+    }
+  
+    .navbar-menu li {
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+  }
