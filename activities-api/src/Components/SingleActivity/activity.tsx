@@ -20,6 +20,7 @@ const SingleActivity = ({activity}:Props)=>{
          
        </div>
         ))}
+        
       </div>
     )
 }
