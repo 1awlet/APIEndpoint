@@ -7,15 +7,36 @@ import Navbar from './Routes/Nav-Bar/navbar';
 import DashBoard from './Components/Activities/Dashboard';
 
 export type Activity= {
-  id:string,
+  id:number,
   description:string,
   title:string,
   venue:string
 
 }
 
+const Data=[
+  {
+    id:34,
+    description:"wandering in forest",
+    title: "The lost boy",
+    venue:"small "
+  },
+  {
+    id:3,
+    description:"wandering in space",
+    title: "Moon landing",
+    venue:"Big "
+  },
+  {
+    id:4,
+    description:"wandering in air",
+    title: "The flying boy",
+    venue:"Medium "
+  },
+]
+
 function App() {
-  const [activities, setactivities]= useState<Activity[]>([]);
+  const [activities, setactivities]= useState<Activity[]>(Data);
   const [filteredData, setFilteredData] = useState(activities);
   const [userInput,setUserInput]= useState("");
 
@@ -27,13 +48,6 @@ function App() {
    ) */
   },[])
 
-  const searchHandlar = (event:any)=>{
-    const value= event.target.value;
-
-    
-    setUserInput(value);
-
-  }
 
  
 
