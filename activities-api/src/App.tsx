@@ -19,7 +19,8 @@ const Data=[
     id:34,
     description:"wandering in forest",
     title: "The lost boy",
-    venue:"small "
+    venue:"small",
+   
   },
   {
     id:3,

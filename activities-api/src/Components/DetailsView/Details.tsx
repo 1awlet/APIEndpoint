@@ -13,7 +13,7 @@ const Details = ()=>{
                 <div className="detailsbtns">
         <button className="edit">    Edit  </button>
         <button className="cancel">    Cancel  </button>
-    ok 
+
                 </div>
             </div>
     )

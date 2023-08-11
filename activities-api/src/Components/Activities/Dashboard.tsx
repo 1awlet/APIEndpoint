@@ -3,6 +3,7 @@ import {Activity} from '../../App';
 import SingleActivity from "../SingleActivity/activity";
 import "./style.css";
 import Details from "../DetailsView/Details";
+import EditForm from "../Edit-Forms/Edit-Forms";
 type prop={
     activities:Activity[]
 }
@@ -46,6 +47,7 @@ const DashBoard = ({activities}:prop)=>{
    
         <SingleActivity activity={filteredData}/>
 <Details />
+<EditForm/>
     </div>
     )
 }
