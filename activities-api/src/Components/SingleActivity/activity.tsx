@@ -1,10 +1,11 @@
 import { Activity } from "../../App";
 import './style.css'
 type Props={
-    activity:Activity[]
+    activity:Activity[],
+    selectEvent: (id: number)=> void
 }
 
-const SingleActivity = ({activity}:Props)=>{
+const SingleActivity = ({activity, selectEvent}:Props)=>{
 
     return(
         <div className="All-activites">
@@ -16,7 +17,7 @@ const SingleActivity = ({activity}:Props)=>{
          <p className="date-added">Date Added: 30, December, 2018</p>
       <p className="description">{activity.description}</p>
 
-      <button className="read-more-button">Read More</button>
+      <button onClick={()=> selectEvent(activity.id)} className="read-more-button">Read More</button>
          
        </div>
         ))}

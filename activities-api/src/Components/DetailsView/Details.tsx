@@ -2,9 +2,10 @@ import "./style.css"
 import boardImg from "../../Assets/Images/board.jpeg"
 import { Activity } from "../../App"
 type prop ={
-    activities:Activity
+    activities:Activity,
+    CancelSelectedEvent: ()=> void
 }
-const Details = ({activities}:prop)=>{
+const Details = ({activities, CancelSelectedEvent}:prop)=>{
     const {description,title, venue,}= activities;
    
     return(
@@ -17,7 +18,7 @@ const Details = ({activities}:prop)=>{
 
                 <div className="detailsbtns">
         <button className="edit">    Edit  </button>
-        <button className="cancel">    Cancel  </button>
+        <button onClick={CancelSelectedEvent} className="cancel">    Cancel  </button>
 
                 </div>
             </div>

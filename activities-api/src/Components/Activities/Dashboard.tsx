@@ -5,7 +5,8 @@ import "./style.css";
 import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
 type prop={
-    activities:Activity[]
+    activities:Activity[],
+  
 }
 
 const DashBoard = ({activities}:prop)=>{
@@ -19,6 +20,9 @@ const DashBoard = ({activities}:prop)=>{
         setSelectedEvent(getEvent);
     }
 
+    const CancelSelectedEvent = ()=>{
+        setSelectedEvent(undefined);
+    }
 
         const searchHandlar = (event:any)=>{
         const value= event.target.value;
@@ -42,9 +46,9 @@ const DashBoard = ({activities}:prop)=>{
       <input type='text'  onChange={searchHandlar}/>
         </div>
    
-        <SingleActivity activity={filteredData}/>
+        <SingleActivity activity={filteredData} selectEvent={SelectedEvent}/>
        {
-        selectedEvent &&  <Details activities={selectedEvent}/>
+        selectedEvent &&  <Details activities={selectedEvent} CancelSelectedEvent={CancelSelectedEvent}/>
        } 
         <EditForm/>
     </div>
