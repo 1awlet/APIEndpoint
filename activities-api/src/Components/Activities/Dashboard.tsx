@@ -50,7 +50,7 @@ const DashBoard = ({activities}:prop)=>{
        {
         selectedEvent &&  <Details activities={selectedEvent} CancelSelectedEvent={CancelSelectedEvent}/>
        } 
-        <EditForm/>
+       
     </div>
     )
 }

@@ -1,11 +1,16 @@
 import { Activity } from "../../App"
 import "./style.css";
 
-const EditForm = ()=>{
+type prop ={
+    id:number
+
+}
+const EditForm = ({id}:prop)=>{
 
     return(
         <div >
             <form > 
+                <h3>Edit for event with the id {id}</h3>
             <div className="editFormContainer">
             <input placeholder="Title"/>
             <input placeholder="Description"/>
