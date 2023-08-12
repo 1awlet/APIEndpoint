@@ -1,14 +1,19 @@
 import "./style.css"
 import boardImg from "../../Assets/Images/board.jpeg"
-
-const Details = ()=>{
-
+import { Activity } from "../../App"
+type prop ={
+    activities:Activity
+}
+const Details = ({activities}:prop)=>{
+    const {description,title, venue,}= activities;
+   
     return(
             <div className="detailsContainter">
                 <img src={boardImg} />
-                <h3>Past events</h3>
+                <h3>{title}</h3>
                 <p> 03-december-2023</p>
-                <p> Last seen: yestarday</p>
+                <p>{venue}</p>
+                <p>{description}</p>
 
                 <div className="detailsbtns">
         <button className="edit">    Edit  </button>

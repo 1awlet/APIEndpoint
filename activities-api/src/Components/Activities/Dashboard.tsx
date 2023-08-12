@@ -8,36 +8,33 @@ type prop={
     activities:Activity[]
 }
 
-
-
 const DashBoard = ({activities}:prop)=>{
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput,setUserInput]= useState("");
+    const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
    
-    const searchHandlar = (event:any)=>{
+    const SelectedEvent = (id:number)=>{
+        const getEvent = filteredData.find((event)=> event.id ==id);
+
+        setSelectedEvent(getEvent);
+    }
+
+
+        const searchHandlar = (event:any)=>{
         const value= event.target.value;
       
         setUserInput(value);
     
       }
-
-     
       useEffect(()=>{
         const newFiltered = activities.filter((item)=>{
             return item.title.toLocaleLowerCase().includes(userInput.toLowerCase());
         }
-    
-        ) 
-        setFilteredData(newFiltered)
+) 
+      setFilteredData(newFiltered)
     }, [userInput, activities])
 
-
-
-
-
-
-    return(
-      
+    return(  
  <div>
         <div  className='SearchBar'>
       <h3>Search for activity</h3>
@@ -46,8 +43,10 @@ const DashBoard = ({activities}:prop)=>{
         </div>
    
         <SingleActivity activity={filteredData}/>
-<Details />
-<EditForm/>
+       {
+        selectedEvent &&  <Details activities={selectedEvent}/>
+       } 
+        <EditForm/>
     </div>
     )
 }
