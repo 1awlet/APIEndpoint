@@ -11,7 +11,9 @@ const Details = ({activities, CancelSelectedEvent}:prop)=>{
     const [isEditOn, setIsEditOn] = useState(false);
     const {id, description,title, venue,}= activities;
     
-   
+ const CancelEditing = ()=>{
+    setIsEditOn(false)
+ }
     return(
         <>
             <div className="detailsContainter">
@@ -29,7 +31,7 @@ const Details = ({activities, CancelSelectedEvent}:prop)=>{
                 </div>
 
             </div>
-            <EditForm id={id} />
+          { isEditOn && <EditForm id={id} cancelEditing={CancelEditing} /> } 
            </> 
     )
 }
