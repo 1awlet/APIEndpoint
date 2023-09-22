@@ -27,13 +27,13 @@ namespace API.Controllers
         //Use the List we get from Application
         return await Mediator.Send(new getList.Query() );
     } 
+   
 
 
     [HttpGet("{id}")]
 
     public async Task<ActionResult<Activity>> GetActivity(Guid id)
     {
-
         return  await Mediator.Send(new getSingleActivity.Query{Id= id});
 
     }

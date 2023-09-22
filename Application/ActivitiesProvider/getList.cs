@@ -13,6 +13,7 @@ namespace Application.ActivitiesProvider
 
     //We pass first our query then we passing what we returning
    //WHich is list of activity
+  
         public class Handler : IRequestHandler<Query, List<Activity>>
         {
          

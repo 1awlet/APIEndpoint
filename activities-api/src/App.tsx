@@ -10,7 +10,8 @@ export type Activity= {
   id:number,
   description:string,
   title:string,
-  venue:string
+  venue:string,
+  date:string
 
 }
 
@@ -20,19 +21,22 @@ const Data=[
     description:"wandering in forest",
     title: "The lost boy",
     venue:"small",
+    date:"2018-04-19"
    
   },
   {
     id:3,
     description:"wandering in space",
     title: "Moon landing",
-    venue:"Big "
+    venue:"Big ",
+    date:"2018-06-9"
   },
   {
     id:4,
     description:"wandering in air",
     title: "The flying boy",
-    venue:"Medium "
+    venue:"Medium ",
+    date:"2018-03-19"
   },
 ]
 

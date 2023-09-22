@@ -1,59 +1,71 @@
-import { useState,useEffect } from "react";
-import {Activity} from '../../App';
+import { useState, useEffect } from "react";
+import { Activity } from '../../App';
 import SingleActivity from "../SingleActivity/activity";
 import "./style.css";
 import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
-type prop={
-    activities:Activity[],
-  
+type prop = {
+    activities: Activity[],
+
 }
 
-const DashBoard = ({activities}:prop)=>{
+const DashBoard = ({ activities }: prop) => {
     const [filteredData, setFilteredData] = useState(activities);
-    const [userInput,setUserInput]= useState("");
+    const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
-   
-    const SelectedEvent = (id:number)=>{
-        const getEvent = filteredData.find((event)=> event.id ==id);
 
+    const SelectedEvent = (id: number) => {
+        const getEvent = filteredData.find((event) => event.id == id);
         setSelectedEvent(getEvent);
     }
 
-    const CancelSelectedEvent = ()=>{
+    const CancelSelectedEvent = () => {
         setSelectedEvent(undefined);
     }
 
-        const searchHandlar = (event:any)=>{
-        const value= event.target.value;
-      
+    const searchHandlar = (event: any) => {
+        const value = event.target.value;
+
         setUserInput(value);
-    
-      }
-      useEffect(()=>{
-        const newFiltered = activities.filter((item)=>{
+
+    }
+    useEffect(() => {
+        const newFiltered = activities.filter((item) => {
             return item.title.toLocaleLowerCase().includes(userInput.toLowerCase());
         }
-) 
-      setFilteredData(newFiltered)
+        )
+        setFilteredData(newFiltered)
     }, [userInput, activities])
 
-    return(  
- <div>
-        <div  className='SearchBar'>
-      <h3>Search for activity</h3>
+    return (
+        <div>
+            <div className='SearchBar'>
+                <h3>Search for activity</h3>
+                <input type='text' onChange={searchHandlar} />
+            </div>
 
-      <input type='text'  onChange={searchHandlar}/>
+            {
+            filteredData.map((item) => (
+                <div className="All-activites">
+                    <SingleActivity 
+                    activity={item} 
+                    selectEvent={SelectedEvent} />
+                    </div>
+
+            ))
+            }
+
+            {
+                selectedEvent && 
+                <Details 
+                activities={selectedEvent} 
+                CancelSelectedEvent={CancelSelectedEvent} 
+                />
+            }
+
         </div>
-   
-        <SingleActivity activity={filteredData} selectEvent={SelectedEvent}/>
-       {
-        selectedEvent &&  <Details activities={selectedEvent} CancelSelectedEvent={CancelSelectedEvent}/>
-       } 
-       
-    </div>
     )
 }
 
 
-export  default DashBoard;
+export default DashBoard;

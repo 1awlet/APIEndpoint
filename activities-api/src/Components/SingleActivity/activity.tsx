@@ -1,29 +1,26 @@
 import { Activity } from "../../App";
 import './style.css'
-type Props={
-    activity:Activity[],
-    selectEvent: (id: number)=> void
+type Props = {
+  activity: Activity,
+  selectEvent: (id: number) => void
 }
 
-const SingleActivity = ({activity, selectEvent}:Props)=>{
+const SingleActivity = ({ activity, selectEvent }: Props) => {
+  let { id, title, date, description } = activity;
+  return (
 
-    return(
-        <div className="All-activites">
-        {activity.map((activity)=>(
-          //const {title} = activity;
-         <div key={activity.id} className="activity-container"> 
-      
-         <h2  className="title">{activity.title}</h2>
-         <p className="date-added">Date Added: 30, December, 2018</p>
-      <p className="description">{activity.description}</p>
+    <div key={id} className="activity-container">
 
-      <button onClick={()=> selectEvent(activity.id)} className="read-more-button">Read More</button>
-         
-       </div>
-        ))}
-        
-      </div>
-    )
+      <h2 className="title">{title}</h2>
+      <p className="date-added">{date}</p>
+      <p className="description">{description}</p>
+
+      <button onClick={() => selectEvent(id)} className="read-more-button">Read More</button>
+    </div>
+
+
+
+  )
 }
 
 export default SingleActivity;
