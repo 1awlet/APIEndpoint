@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Activity } from "../../App"
 import "./style.css";
-
+import { channel } from "diagnostics_channel";
+import { ChangeEvent } from "react";
 type prop ={
     activities:Activity,
     cancelEditing:()=> void,
@@ -18,16 +19,23 @@ const EditForm = ({activities:selectedActivity,cancelEditing}:prop)=>{
     }
     const [activity, setActivity] = useState(initialState)
 
+    const submitHandlar = ()=>{
+
+    }
+    const changeHandlar = (event:ChangeEvent<HTMLInputElement>)=>{
+        let {name, value}= event.target;
+        setActivity({...activity, [name]:value})
+    }
     return(
         <div >
-            <form > 
+            <form onSubmit={submitHandlar} autoComplete="off"> 
                
             <div className="editFormContainer">
             <h3>Edit for event with the id {activity.id}</h3>
-            <input placeholder="Title" value={activity.title}/>
-            <input placeholder="Description" value={activity.description}/>
-            <input placeholder="venue" value={activity.venue}/>
-            <input placeholder="venue" value={activity.date}/>
+            <input placeholder="Title" value={activity.title} name="title" onChange={changeHandlar} />
+            <input placeholder="Description" value={activity.description} name="description" onChange={changeHandlar}/>
+            <input placeholder="venue" value={activity.venue} name="venue" onChange={changeHandlar}/>
+            <input placeholder="venue" value={activity.date} name="date" onChange={changeHandlar}/>
            
            <div> 
              <button onClick={cancelEditing} className="cancel">Cancel </button>

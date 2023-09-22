@@ -5,19 +5,21 @@ import EditForm from "../Edit-Forms/Edit-Forms";
 import { useState } from "react";
 type prop ={
     activities:Activity,
-    CancelSelectedEvent: ()=> void
+    CancelSelectedEvent: ()=> void,
+
 }
 const Details = ({activities, CancelSelectedEvent}:prop)=>{
     const [isEditOn, setIsEditOn] = useState(false);
    
     const {id, description,title, venue}= activities;
 
- const CancelEditing = ()=>{
-    setIsEditOn(false)
- }
+    const CancelEditing = ()=>{
+        setIsEditOn(false)
+    }
+
     return(
         <>
-            <div className="detailsContainter">
+            <div className= {isEditOn ?  "detailsContainter hideDetails" : "detailsContainter"}>
                 <img src={boardImg} />
                 <h3>{title}</h3>
                 <p> 03-december-2023</p>
@@ -26,7 +28,7 @@ const Details = ({activities, CancelSelectedEvent}:prop)=>{
 
                 <div className="detailsbtns">
         <button 
-        onClick={()=> setIsEditOn(true)} 
+        onClick={()=> setIsEditOn(true) } 
         className="edit"
         >  
                   Edit  </button>

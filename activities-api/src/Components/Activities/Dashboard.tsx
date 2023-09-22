@@ -46,7 +46,7 @@ const DashBoard = ({ activities }: prop) => {
 
             {
             filteredData.map((item) => (
-                <div className="All-activites">
+                <div className="All-activites" key={item.id}>
                     <SingleActivity 
                     activity={item} 
                     selectEvent={SelectedEvent} />
@@ -59,7 +59,8 @@ const DashBoard = ({ activities }: prop) => {
                 selectedEvent && 
                 <Details 
                 activities={selectedEvent} 
-                CancelSelectedEvent={CancelSelectedEvent} 
+                CancelSelectedEvent={CancelSelectedEvent}
+       
                 />
             }
 

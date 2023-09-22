@@ -1,6 +1,7 @@
-.editFormContainer {width: 240px;
+.editFormContainer {
+    width: 240px;
     position: absolute;
-    top: 22em;
+   top: 6em;
     right: 6em;
     border: 1px solid black;
    display: flex;
