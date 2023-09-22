@@ -6,9 +6,10 @@ import { useState } from "react";
 type prop ={
     activities:Activity,
     CancelSelectedEvent: ()=> void,
+    createOrEditActivityHandlar:(activity:Activity)=> void
 
 }
-const Details = ({activities, CancelSelectedEvent}:prop)=>{
+const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar}:prop)=>{
     const [isEditOn, setIsEditOn] = useState(false);
    
     const {id, description,title, venue}= activities;
@@ -41,7 +42,7 @@ const Details = ({activities, CancelSelectedEvent}:prop)=>{
                 </div>
 
             </div>
-          { isEditOn && <EditForm activities ={activities} cancelEditing={CancelEditing} /> } 
+          { isEditOn && <EditForm activities ={activities} cancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
            </> 
     )
 }

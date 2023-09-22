@@ -6,10 +6,10 @@ import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
 type prop = {
     activities: Activity[],
-
+    createOrEditActivityHandlar: (activity:Activity)=>void
 }
 
-const DashBoard = ({ activities }: prop) => {
+const DashBoard = ({ activities, createOrEditActivityHandlar }: prop) => {
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
@@ -60,7 +60,7 @@ const DashBoard = ({ activities }: prop) => {
                 <Details 
                 activities={selectedEvent} 
                 CancelSelectedEvent={CancelSelectedEvent}
-       
+                createOrEditActivityHandlar={createOrEditActivityHandlar}
                 />
             }
 

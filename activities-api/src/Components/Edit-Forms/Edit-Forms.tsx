@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { Activity } from "../../App"
 import "./style.css";
 import { channel } from "diagnostics_channel";
 import { ChangeEvent } from "react";
+import { FormEvent } from "react";
+
 type prop ={
     activities:Activity,
     cancelEditing:()=> void,
+    createOrEditActivityHandlar: (activity:Activity)=> void
 }
 
-const EditForm = ({activities:selectedActivity,cancelEditing}:prop)=>{
+const EditForm = ({activities:selectedActivity,cancelEditing, createOrEditActivityHandlar}:prop)=>{
     const initialState =  selectedActivity ?? {
     id:"",
     description: "",
@@ -19,7 +22,9 @@ const EditForm = ({activities:selectedActivity,cancelEditing}:prop)=>{
     }
     const [activity, setActivity] = useState(initialState)
 
-    const submitHandlar = ()=>{
+    const submitHandlar = (event:FormEvent)=>{
+        event.preventDefault();
+        createOrEditActivityHandlar(activity)
 
     }
     const changeHandlar = (event:ChangeEvent<HTMLInputElement>)=>{
@@ -28,7 +33,7 @@ const EditForm = ({activities:selectedActivity,cancelEditing}:prop)=>{
     }
     return(
         <div >
-            <form onSubmit={submitHandlar} autoComplete="off"> 
+            <form onSubmit={submitHandlar} > 
                
             <div className="editFormContainer">
             <h3>Edit for event with the id {activity.id}</h3>

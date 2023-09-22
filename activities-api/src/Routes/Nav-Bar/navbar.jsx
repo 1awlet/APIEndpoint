@@ -3,6 +3,9 @@ import Menu from "../../Assets/Images/menu.svg";
 import Xmark from "../../Assets/Images/xmark.svg";
 import EditForm from "../../Components/Edit-Forms/Edit-Forms";
 import './navbarStyle.css'
+import { Activity } from "../../App";
+
+
 const Navbar = ()=>{
     const [isOpen, setIsOpen] = useState(false);
     const [isAddActivityOn,setIsAddActivityOn]= useState(false)

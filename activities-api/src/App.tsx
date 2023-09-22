@@ -54,20 +54,23 @@ function App() {
   },[])
 
   const createOrEditActivityHandlar = (activity:Activity)=>{
+    const updateActivity =[...activities.filter((x)=> x.id != activity.id), activity]
+
     if(activity.id){
-      setactivities([...activities.filter((x=> x.id != activity.id),activity)])
+      setactivities(updateActivity)
     }else{
       setactivities([...activities, activity])
-
     }
+
   }
  
+  console.log(activities)
 
 
   return (
     <div className="App">
       <Navbar />
-      <DashBoard activities={activities} />
+      <DashBoard activities={activities}  createOrEditActivityHandlar={createOrEditActivityHandlar}/>
     </div>
   );
 }
