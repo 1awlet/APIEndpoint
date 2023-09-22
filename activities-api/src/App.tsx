@@ -53,7 +53,14 @@ function App() {
    ) */
   },[])
 
+  const createOrEditActivityHandlar = (activity:Activity)=>{
+    if(activity.id){
+      setactivities([...activities.filter((x=> x.id != activity.id),activity)])
+    }else{
+      setactivities([...activities, activity])
 
+    }
+  }
  
 
 
