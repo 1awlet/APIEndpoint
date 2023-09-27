@@ -15,6 +15,9 @@ const Navbar = ({createOrEditActivityHandlar,isEditOn, setEditOn, SelectedEvent,
     const toggleMenu = () => {
       setIsOpen(!isOpen);
     };
+    const hideAddActivityOn = ()=>{
+      setIsAddActivityOn(false)
+    }
     return(
       <>
      <nav className={`navbar ${isOpen ? 'open' : ''}`}>
@@ -35,7 +38,7 @@ const Navbar = ({createOrEditActivityHandlar,isEditOn, setEditOn, SelectedEvent,
     SelectedEvent={SelectedEvent}
     CancelSelectedEvent={CancelSelectedEvent}
     selectedEvent={selectedEvent}
-    CancelEditing={CancelEditing}
+    CancelEditing={hideAddActivityOn}
     /> } 
     </>
 )
