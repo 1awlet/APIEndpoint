@@ -59,18 +59,9 @@ function App() {
 
  
 
-    const CancelSelectedEvent = () => {
-      setSelectedEvent(undefined);
-  }
 
-  const SelectedEvent = (id: string) => {
-    const getEvent = filteredData.find((event) => event.id == id);
-    setSelectedEvent(getEvent);
-  }
   const createOrEditActivityHandlar = (activity:Activity)=>{
     const updateActivity =[...activities.filter((x)=> x.id != activity.id), activity]
-
-
     if(activity.id){
       setactivities(updateActivity)
     }else{
@@ -84,26 +75,20 @@ function App() {
     setactivities(updatedActivity)
   }
  
-  console.log(activities)
+
 
 
   return (
     <div className="App">
       <Navbar 
       createOrEditActivityHandlar={createOrEditActivityHandlar}
-      CancelSelectedEvent={CancelSelectedEvent}
-      SelectedEvent={SelectedEvent}
-      selectedEvent={selectedEvent}
       />
+
       <DashBoard 
       activities={activities}  
       createOrEditActivityHandlar={createOrEditActivityHandlar}
-    
-      CancelSelectedEvent={CancelSelectedEvent}
-      SelectedEvent={SelectedEvent}
-      selectedEvent={selectedEvent}
       DeleteActivity={DeleteActivity}
-  
+
       />
     </div>
   );

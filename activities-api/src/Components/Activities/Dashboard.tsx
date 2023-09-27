@@ -7,29 +7,31 @@ import EditForm from "../Edit-Forms/Edit-Forms";
 type prop = {
     activities: Activity[],
     createOrEditActivityHandlar: (activity:Activity)=>void,
- 
-    SelectedEvent: (id:string)=> void,
-    CancelSelectedEvent: ()=> void
-    selectedEvent?:Activity
+
     DeleteActivity: (activityId:string)=> void
 }
 
 
 
 const DashBoard = (
-    { activities, createOrEditActivityHandlar,SelectedEvent,CancelSelectedEvent,
-        DeleteActivity,
-        selectedEvent }
+    { activities, createOrEditActivityHandlar,DeleteActivity }
     : prop) => {
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
-
+    const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
 
     const searchHandlar = (event: any) => {
         const value = event.target.value;
-
         setUserInput(value);
+    }
 
+    const CancelSelectedEvent = () => {
+        setSelectedEvent(undefined);
+    }
+  
+    const handleSelectedActivity = (id: string) => {
+      const getEvent = filteredData.find((event) => event.id == id);
+      setSelectedEvent(getEvent);
     }
     useEffect(() => {
         const newFiltered = activities.filter((item) => {
@@ -51,10 +53,9 @@ const DashBoard = (
                 <div className="All-activites" key={item.id}>
                     <SingleActivity 
                     activity={item} 
-                    selectEvent={SelectedEvent}
+                    selectEvent={handleSelectedActivity}
                     DeleteActivity={DeleteActivity}
-                    />
-                    
+                    />     
                     </div>
 
             ))
