@@ -84,6 +84,11 @@ function App() {
     }
 
   }
+  const DeleteActivity = (activityId:string)=>{
+    const updatedActivity = activities.filter((x)=> x.id !== activityId );
+    
+    setactivities(updatedActivity)
+  }
  
   console.log(activities)
 
@@ -108,6 +113,7 @@ function App() {
       CancelSelectedEvent={CancelSelectedEvent}
       SelectedEvent={SelectedEvent}
       selectedEvent={selectedEvent}
+      DeleteActivity={DeleteActivity}
   
       />
     </div>

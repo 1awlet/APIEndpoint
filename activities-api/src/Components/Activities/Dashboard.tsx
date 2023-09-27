@@ -13,17 +13,16 @@ type prop = {
     SelectedEvent: (id:string)=> void,
     CancelSelectedEvent: ()=> void
     selectedEvent?:Activity
+    DeleteActivity: (activityId:string)=> void
 }
 
 const DashBoard = (
     { activities, createOrEditActivityHandlar, CancelEditing, isEditOn,setEditOn,SelectedEvent,CancelSelectedEvent,
+        DeleteActivity,
         selectedEvent }
     : prop) => {
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
-
-
-   
 
 
     const searchHandlar = (event: any) => {
@@ -52,7 +51,10 @@ const DashBoard = (
                 <div className="All-activites" key={item.id}>
                     <SingleActivity 
                     activity={item} 
-                    selectEvent={SelectedEvent} />
+                    selectEvent={SelectedEvent}
+                    DeleteActivity={DeleteActivity}
+                    />
+                    
                     </div>
 
             ))

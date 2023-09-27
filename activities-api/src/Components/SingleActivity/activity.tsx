@@ -2,10 +2,11 @@ import { Activity } from "../../App";
 import './style.css'
 type Props = {
   activity: Activity,
-  selectEvent: (id: string) => void
+  selectEvent: (id: string) => void,
+  DeleteActivity: (activityId: string)=> void
 }
 
-const SingleActivity = ({ activity, selectEvent }: Props) => {
+const SingleActivity = ({ activity, selectEvent,DeleteActivity }: Props) => {
   let { id, title, date, description } = activity;
   return (
 
@@ -16,6 +17,8 @@ const SingleActivity = ({ activity, selectEvent }: Props) => {
       <p className="description">{description}</p>
 
       <button onClick={() => selectEvent(id)} className="read-more-button">Read More</button>
+      <button className="deleteButton" onClick={()=> DeleteActivity(id)}>
+        Remove </button>
     </div>
 
 
