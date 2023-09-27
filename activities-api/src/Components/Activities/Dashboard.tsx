@@ -6,22 +6,25 @@ import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
 type prop = {
     activities: Activity[],
-    createOrEditActivityHandlar: (activity:Activity)=>void
+    createOrEditActivityHandlar: (activity:Activity)=>void,
+    CancelEditing: ()=> void,
+    isEditOn: boolean,
+    setEditOn: ()=> void,
+    SelectedEvent: (id:string)=> void,
+    CancelSelectedEvent: ()=> void
+    selectedEvent?:Activity
 }
 
-const DashBoard = ({ activities, createOrEditActivityHandlar }: prop) => {
+const DashBoard = (
+    { activities, createOrEditActivityHandlar, CancelEditing, isEditOn,setEditOn,SelectedEvent,CancelSelectedEvent,
+        selectedEvent }
+    : prop) => {
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
-    const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
 
-    const SelectedEvent = (id: string) => {
-        const getEvent = filteredData.find((event) => event.id == id);
-        setSelectedEvent(getEvent);
-    }
 
-    const CancelSelectedEvent = () => {
-        setSelectedEvent(undefined);
-    }
+   
+
 
     const searchHandlar = (event: any) => {
         const value = event.target.value;
@@ -61,6 +64,9 @@ const DashBoard = ({ activities, createOrEditActivityHandlar }: prop) => {
                 activities={selectedEvent} 
                 CancelSelectedEvent={CancelSelectedEvent}
                 createOrEditActivityHandlar={createOrEditActivityHandlar}
+                CancelEditing={CancelEditing}
+                isEditOn= {isEditOn}
+                setEditOn={setEditOn}
                 />
             }
 

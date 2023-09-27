@@ -45,7 +45,9 @@ const Data=[
 function App() {
   const [activities, setactivities]= useState<Activity[]>(Data);
   const [filteredData, setFilteredData] = useState(activities);
+  const [isEditOn, setIsEditOn] = useState(false);
   const [userInput,setUserInput]= useState("");
+  const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
 
   useEffect(()=>{
    /*axios.get<Activity[]>("http://localhost:5100/api/activities").then((res)=> {
@@ -55,6 +57,22 @@ function App() {
    ) */
   },[])
 
+  const CancelEditing = ()=>{
+    setIsEditOn(false)
+  }
+
+    const setEditOn = ()=>{
+      setIsEditOn(true)
+    }
+
+    const CancelSelectedEvent = () => {
+      setSelectedEvent(undefined);
+  }
+
+  const SelectedEvent = (id: string) => {
+    const getEvent = filteredData.find((event) => event.id == id);
+    setSelectedEvent(getEvent);
+  }
   const createOrEditActivityHandlar = (activity:Activity)=>{
     const updateActivity =[...activities.filter((x)=> x.id != activity.id), activity]
 
@@ -72,8 +90,26 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar createOrEditActivityHandlar={createOrEditActivityHandlar}/>
-      <DashBoard activities={activities}  createOrEditActivityHandlar={createOrEditActivityHandlar}/>
+      <Navbar 
+      createOrEditActivityHandlar={createOrEditActivityHandlar}
+      isEditOn={isEditOn}
+      setEditOn={setEditOn}
+      CancelSelectedEvent={CancelSelectedEvent}
+      SelectedEvent={SelectedEvent}
+      selectedEvent={selectedEvent}
+      CancelEditing={CancelEditing}
+      />
+      <DashBoard 
+      activities={activities}  
+      createOrEditActivityHandlar={createOrEditActivityHandlar}
+      CancelEditing={CancelEditing}
+      isEditOn={isEditOn}
+      setEditOn={setEditOn}
+      CancelSelectedEvent={CancelSelectedEvent}
+      SelectedEvent={SelectedEvent}
+      selectedEvent={selectedEvent}
+  
+      />
     </div>
   );
 }

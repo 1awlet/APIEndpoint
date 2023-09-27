@@ -6,17 +6,19 @@ import { useState } from "react";
 type prop ={
     activities:Activity,
     CancelSelectedEvent: ()=> void,
-    createOrEditActivityHandlar:(activity:Activity)=> void
+    createOrEditActivityHandlar:(activity:Activity)=> void,
+    CancelEditing: ()=> void,
+    isEditOn: boolean,
+    setEditOn: ()=> void
 
 }
-const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar}:prop)=>{
-    const [isEditOn, setIsEditOn] = useState(false);
+
+const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar,CancelEditing,isEditOn,setEditOn }:prop)=>{
+   
    
     const {id, description,title, venue}= activities;
 
-    const CancelEditing = ()=>{
-        setIsEditOn(false)
-    }
+    
 
     return(
         <>
@@ -29,7 +31,7 @@ const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar}:p
 
                 <div className="detailsbtns">
         <button 
-        onClick={()=> setIsEditOn(true) } 
+        onClick={setEditOn } 
         className="edit"
         >  
                   Edit  </button>
@@ -42,7 +44,7 @@ const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar}:p
                 </div>
 
             </div>
-          { isEditOn && <EditForm activities ={activities} cancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
+          { isEditOn && <EditForm activities ={activities} CancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
            </> 
     )
 }

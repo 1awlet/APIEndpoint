@@ -7,11 +7,11 @@ import { FormEvent } from "react";
 
 type prop ={
     activities:Activity,
-    cancelEditing:()=> void,
+    CancelEditing:()=> void,
     createOrEditActivityHandlar: (activity:Activity)=> void
 }
 
-const EditForm = ({activities:selectedActivity,cancelEditing, createOrEditActivityHandlar}:prop)=>{
+const EditForm = ({activities:selectedActivity,CancelEditing, createOrEditActivityHandlar}:prop)=>{
     const initialState =  selectedActivity ?? {
     id:"",
     description: "",
@@ -43,7 +43,7 @@ const EditForm = ({activities:selectedActivity,cancelEditing, createOrEditActivi
             <input placeholder="venue" value={activity.date} name="date" onChange={changeHandlar}/>
            
            <div> 
-             <button onClick={cancelEditing} className="cancel">Cancel </button>
+             <button onClick={CancelEditing} type="button" className="cancel">Cancel </button>
             <button className="submitbtn" type="submit"> Submit </button>
             </div>
             </div>
