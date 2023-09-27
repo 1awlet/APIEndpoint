@@ -2,7 +2,7 @@ import { Activity } from "../../App";
 import './style.css'
 type Props = {
   activity: Activity,
-  selectEvent: (id: number) => void
+  selectEvent: (id: string) => void
 }
 
 const SingleActivity = ({ activity, selectEvent }: Props) => {

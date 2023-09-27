@@ -18,7 +18,6 @@ namespace API.Controllers
         }*/
       
 
-
    //For someone to reach this end point they will have 
    // to specify this url
     [HttpGet] //ap/activities
@@ -28,8 +27,6 @@ namespace API.Controllers
         return await Mediator.Send(new getList.Query() );
     } 
    
-
-
     [HttpGet("{id}")]
 
     public async Task<ActionResult<Activity>> GetActivity(Guid id)
@@ -38,14 +35,10 @@ namespace API.Controllers
 
     }
 
-   
     [HttpPost]
-
     public async Task<IActionResult> CreateActivities(Activity activity){
 
         return Ok(await Mediator.Send(new CreateActivity.Command{Activity=activity}));
-
-
     }
 
 

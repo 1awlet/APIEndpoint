@@ -14,7 +14,7 @@ const DashBoard = ({ activities, createOrEditActivityHandlar }: prop) => {
     const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
 
-    const SelectedEvent = (id: number) => {
+    const SelectedEvent = (id: string) => {
         const getEvent = filteredData.find((event) => event.id == id);
         setSelectedEvent(getEvent);
     }

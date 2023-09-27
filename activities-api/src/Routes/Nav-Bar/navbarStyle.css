@@ -14,14 +14,13 @@
   .navbar.open {
     right: 0;
   }
-
   
-  .hamburger {
+.hamburger {
     cursor: pointer;
     width: 24px;
     height: 24px;
     display: none; /* Hide the hamburger and close icons on larger screens */
-  }
+}
   
   .navbar-menu {
     list-style: none;

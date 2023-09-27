@@ -5,9 +5,11 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Routes/Nav-Bar/navbar';
 import DashBoard from './Components/Activities/Dashboard';
+import {v4 as uuid} from "uuid";
+
 
 export type Activity= {
-  id:number,
+  id:string,
   description:string,
   title:string,
   venue:string,
@@ -17,7 +19,7 @@ export type Activity= {
 
 const Data=[
   {
-    id:34,
+    id:"34",
     description:"wandering in forest",
     title: "The lost boy",
     venue:"small",
@@ -25,14 +27,14 @@ const Data=[
    
   },
   {
-    id:3,
+    id:"3",
     description:"wandering in space",
     title: "Moon landing",
     venue:"Big ",
     date:"2018-06-9"
   },
   {
-    id:4,
+    id:"4",
     description:"wandering in air",
     title: "The flying boy",
     venue:"Medium ",
@@ -56,10 +58,11 @@ function App() {
   const createOrEditActivityHandlar = (activity:Activity)=>{
     const updateActivity =[...activities.filter((x)=> x.id != activity.id), activity]
 
+
     if(activity.id){
       setactivities(updateActivity)
     }else{
-      setactivities([...activities, activity])
+      setactivities([...activities, {...activity, id:uuid()}])
     }
 
   }
@@ -69,7 +72,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar createOrEditActivityHandlar={createOrEditActivityHandlar}/>
       <DashBoard activities={activities}  createOrEditActivityHandlar={createOrEditActivityHandlar}/>
     </div>
   );
