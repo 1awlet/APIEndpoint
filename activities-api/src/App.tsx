@@ -45,7 +45,7 @@ const Data=[
 function App() {
   const [activities, setactivities]= useState<Activity[]>(Data);
   const [filteredData, setFilteredData] = useState(activities);
-  const [isEditOn, setIsEditOn] = useState(false);
+
   const [userInput,setUserInput]= useState("");
   const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
 
@@ -57,13 +57,7 @@ function App() {
    ) */
   },[])
 
-  const CancelEditing = ()=>{
-    setIsEditOn(false)
-  }
-
-    const setEditOn = ()=>{
-      setIsEditOn(true)
-    }
+ 
 
     const CancelSelectedEvent = () => {
       setSelectedEvent(undefined);
@@ -97,19 +91,14 @@ function App() {
     <div className="App">
       <Navbar 
       createOrEditActivityHandlar={createOrEditActivityHandlar}
-      isEditOn={isEditOn}
-      setEditOn={setEditOn}
       CancelSelectedEvent={CancelSelectedEvent}
       SelectedEvent={SelectedEvent}
       selectedEvent={selectedEvent}
-      CancelEditing={CancelEditing}
       />
       <DashBoard 
       activities={activities}  
       createOrEditActivityHandlar={createOrEditActivityHandlar}
-      CancelEditing={CancelEditing}
-      isEditOn={isEditOn}
-      setEditOn={setEditOn}
+    
       CancelSelectedEvent={CancelSelectedEvent}
       SelectedEvent={SelectedEvent}
       selectedEvent={selectedEvent}

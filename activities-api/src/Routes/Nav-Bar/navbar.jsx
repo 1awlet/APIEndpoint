@@ -7,8 +7,8 @@ import {v4 as uuid} from "uuid";
 import { Activity } from "../../App";
 
 
-const Navbar = ({createOrEditActivityHandlar,isEditOn, setEditOn, SelectedEvent,CancelSelectedEvent,
-  selectedEvent, CancelEditing})=>{
+const Navbar = ({createOrEditActivityHandlar, SelectedEvent,CancelSelectedEvent,
+  selectedEvent})=>{
     const [isOpen, setIsOpen] = useState(false);
     const [isAddActivityOn,setIsAddActivityOn]= useState(false)
 
@@ -33,8 +33,6 @@ const Navbar = ({createOrEditActivityHandlar,isEditOn, setEditOn, SelectedEvent,
     {isAddActivityOn && 
     <EditForm 
     createOrEditActivityHandlar={createOrEditActivityHandlar} 
-    isEditOn={isEditOn}
-    setEditOn={setEditOn}
     SelectedEvent={SelectedEvent}
     CancelSelectedEvent={CancelSelectedEvent}
     selectedEvent={selectedEvent}

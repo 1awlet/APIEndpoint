@@ -7,14 +7,22 @@ type prop ={
     activities:Activity,
     CancelSelectedEvent: ()=> void,
     createOrEditActivityHandlar:(activity:Activity)=> void,
-    CancelEditing: ()=> void,
-    isEditOn: boolean,
-    setEditOn: ()=> void
+  
+    
 
 }
 
-const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar,CancelEditing,isEditOn,setEditOn }:prop)=>{
-   
+
+const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar }:prop)=>{
+    const [isEditOn, setIsEditOn] = useState(false);
+
+    const CancelEditing = ()=>{
+        setIsEditOn(false)
+      }
+    
+    const setEditOn = ()=>{
+          setIsEditOn(true)
+    }
    
     const {id, description,title, venue}= activities;
 

@@ -7,17 +7,17 @@ import EditForm from "../Edit-Forms/Edit-Forms";
 type prop = {
     activities: Activity[],
     createOrEditActivityHandlar: (activity:Activity)=>void,
-    CancelEditing: ()=> void,
-    isEditOn: boolean,
-    setEditOn: ()=> void,
+ 
     SelectedEvent: (id:string)=> void,
     CancelSelectedEvent: ()=> void
     selectedEvent?:Activity
     DeleteActivity: (activityId:string)=> void
 }
 
+
+
 const DashBoard = (
-    { activities, createOrEditActivityHandlar, CancelEditing, isEditOn,setEditOn,SelectedEvent,CancelSelectedEvent,
+    { activities, createOrEditActivityHandlar,SelectedEvent,CancelSelectedEvent,
         DeleteActivity,
         selectedEvent }
     : prop) => {
@@ -66,9 +66,6 @@ const DashBoard = (
                 activities={selectedEvent} 
                 CancelSelectedEvent={CancelSelectedEvent}
                 createOrEditActivityHandlar={createOrEditActivityHandlar}
-                CancelEditing={CancelEditing}
-                isEditOn= {isEditOn}
-                setEditOn={setEditOn}
                 />
             }
 
