@@ -52,7 +52,12 @@ function App() {
 
   useEffect(()=>{
     agent.activitiesCrud.list().then((res)=> {
-    setactivities(res) 
+      let activitiesEdited:Activity[]=[]
+      res.forEach((activity)=>{
+        activity.date= activity.date.split("T")[0]
+        activitiesEdited.push(activity)
+      })
+    setactivities(activitiesEdited) 
    }
    )
   },[])

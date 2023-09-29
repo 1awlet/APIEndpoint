@@ -40,7 +40,7 @@ const EditForm = ({activities:selectedActivity,CancelEditing, createOrEditActivi
             <input placeholder="Title" value={activity.title} name="title" onChange={changeHandlar} />
             <input placeholder="Description" value={activity.description} name="description" onChange={changeHandlar}/>
             <input placeholder="venue" value={activity.venue} name="venue" onChange={changeHandlar}/>
-            <input placeholder="venue" value={activity.date} name="date" onChange={changeHandlar}/>
+            <input placeholder="venue" type="date" value={activity.date} name="date" onChange={changeHandlar}/>
            
            <div> 
              <button onClick={CancelEditing} type="button" className="cancel">Cancel </button>
