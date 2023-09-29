@@ -6,6 +6,7 @@ import axios from 'axios';
 import Navbar from './Routes/Nav-Bar/navbar';
 import DashBoard from './Components/Activities/Dashboard';
 import {v4 as uuid} from "uuid";
+import agent from './api-agent/agent';
 
 
 export type Activity= {
@@ -43,18 +44,18 @@ const Data=[
 ]
 
 function App() {
-  const [activities, setactivities]= useState<Activity[]>(Data);
+  const [activities, setactivities]= useState<Activity[]>([]);
   const [filteredData, setFilteredData] = useState(activities);
 
   const [userInput,setUserInput]= useState("");
   const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
 
   useEffect(()=>{
-   /*axios.get<Activity[]>("http://localhost:5100/api/activities").then((res)=> {
-    setactivities(res.data)
+    agent.activitiesCrud.list().then((res)=> {
+    setactivities(res)
     
    }
-   ) */
+   )
   },[])
 
  

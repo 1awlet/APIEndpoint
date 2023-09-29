@@ -23,6 +23,7 @@ const Navbar = ({createOrEditActivityHandlar})=>{
       <div className="navbar-brand">
         <img src={ isOpen? Xmark : Menu } alt="Hamburger" className="hamburger" onClick={toggleMenu} />
       </div>
+
       <ul className="navbar-menu">
         <li>Home</li>
         <li>About</li>
