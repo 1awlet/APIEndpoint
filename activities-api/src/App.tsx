@@ -52,8 +52,7 @@ function App() {
 
   useEffect(()=>{
     agent.activitiesCrud.list().then((res)=> {
-    setactivities(res)
-    
+    setactivities(res) 
    }
    )
   },[])
