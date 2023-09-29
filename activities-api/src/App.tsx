@@ -7,7 +7,7 @@ import Navbar from './Routes/Nav-Bar/navbar';
 import DashBoard from './Components/Activities/Dashboard';
 import {v4 as uuid} from "uuid";
 import agent from './api-agent/agent';
-
+import LoadingSpinner from './Components/LoadingComponent/loading';
 
 export type Activity= {
   id:string,
@@ -49,7 +49,7 @@ function App() {
 
   const [userInput,setUserInput]= useState("");
   const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
-
+  const [isLoading, setIsLoading]= useState(true);
   useEffect(()=>{
     agent.activitiesCrud.list().then((res)=> {
       let activitiesEdited:Activity[]=[]
@@ -58,6 +58,7 @@ function App() {
         activitiesEdited.push(activity)
       })
     setactivities(activitiesEdited) 
+    setIsLoading(false)
    }
    )
   },[])
@@ -88,13 +89,18 @@ function App() {
       <Navbar 
       createOrEditActivityHandlar={createOrEditActivityHandlar}
       />
+{isLoading ? 
+<LoadingSpinner />
 
-      <DashBoard 
-      activities={activities}  
-      createOrEditActivityHandlar={createOrEditActivityHandlar}
-      DeleteActivity={DeleteActivity}
+:
+<DashBoard 
+activities={activities}  
+createOrEditActivityHandlar={createOrEditActivityHandlar}
+DeleteActivity={DeleteActivity}
 
-      />
+/>
+}
+     
     </div>
   );
 }
