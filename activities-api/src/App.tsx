@@ -75,13 +75,12 @@ function App() {
       activity.id= uuid();
       await agent.activitiesCrud.add(activity)
       setactivities([...activities, activity])
-
     }
 
   }
   const DeleteActivity = (activityId:string)=>{
     const updatedActivity = activities.filter((x)=> x.id !== activityId );
-    
+    agent.activitiesCrud.delete(activityId)
     setactivities(updatedActivity)
   }
  
