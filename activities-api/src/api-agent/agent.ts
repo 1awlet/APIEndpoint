@@ -30,7 +30,11 @@ const requests = {
 }
 
 const activitiesCrud={
-    list: ()=> requests.get<Activity[]>("/activities")
+    list: ()=> requests.get<Activity[]>("/activities"),
+    add: (activity:Activity)=> requests.post<void>("/activities",activity),
+    getActivity: (id:string)=> requests.get<Activity>(`/activities/${id}`),
+    update: (activity:Activity)=> requests.put<void>(`/activities/${activity.id}`, activity),
+    delete: (id:string)=> requests.delete<void>(`/activities/${id}`)
 }
 
 const agent = {
