@@ -8,7 +8,7 @@ import DashBoard from './Components/Activities/Dashboard';
 import {v4 as uuid} from "uuid";
 import agent from './api-agent/agent';
 import LoadingSpinner from './Components/LoadingComponent/loading';
-
+import { useStore } from './Store/store';
 export type Activity= {
   id:string,
   description:string,
@@ -18,32 +18,10 @@ export type Activity= {
 
 }
 
-const Data=[
-  {
-    id:"34",
-    description:"wandering in forest",
-    title: "The lost boy",
-    venue:"small",
-    date:"2018-04-19"
-   
-  },
-  {
-    id:"3",
-    description:"wandering in space",
-    title: "Moon landing",
-    venue:"Big ",
-    date:"2018-06-9"
-  },
-  {
-    id:"4",
-    description:"wandering in air",
-    title: "The flying boy",
-    venue:"Medium ",
-    date:"2018-03-19"
-  },
-]
+
 
 function App() {
+  const {activityStore} = useStore()
   const [activities, setactivities]= useState<Activity[]>([]);
   const [filteredData, setFilteredData] = useState(activities);
 
@@ -89,6 +67,7 @@ function App() {
 
   return (
     <div className="App">
+
       <Navbar 
       createOrEditActivityHandlar={createOrEditActivityHandlar}
       />
