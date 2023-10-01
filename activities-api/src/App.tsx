@@ -72,7 +72,10 @@ function App() {
       setactivities(updateActivity)
   
     }else{
-      setactivities([...activities, {...activity, id:uuid()}])
+      activity.id= uuid();
+      await agent.activitiesCrud.add(activity)
+      setactivities([...activities, activity])
+
     }
 
   }
