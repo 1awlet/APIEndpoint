@@ -48,7 +48,6 @@ function App() {
   const [filteredData, setFilteredData] = useState(activities);
 
   const [userInput,setUserInput]= useState("");
-  const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
   const [isLoading, setIsLoading]= useState(true);
   useEffect(()=>{
     agent.activitiesCrud.list().then((res)=> {
@@ -66,10 +65,12 @@ function App() {
  
 
 
-  const createOrEditActivityHandlar = (activity:Activity)=>{
+  const createOrEditActivityHandlar = async (activity:Activity)=>{
     const updateActivity =[...activities.filter((x)=> x.id != activity.id), activity]
     if(activity.id){
+      await agent.activitiesCrud.update(activity)
       setactivities(updateActivity)
+  
     }else{
       setactivities([...activities, {...activity, id:uuid()}])
     }
