@@ -10,7 +10,7 @@ export default class ActivityStore{
     }
 
     fetchActivities = async ()=>{
-    this.loadingActivities= true;
+        this.setLoadingState(true)
     try {
         const activities= await agent.activitiesCrud.list();
     
@@ -19,12 +19,18 @@ export default class ActivityStore{
             this.activities.push(activity)
         })
 
-        this.loadingActivities= false;
+        this.setLoadingState(false)
         
     } catch (error) {
         console.log(error)
-        this.loadingActivities= false;
+        this.setLoadingState(false)
     }
    
+    }
+
+
+    setLoadingState = (state:boolean)=>{
+        this.loadingActivities=state;
+
     }
 }
