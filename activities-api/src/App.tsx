@@ -9,6 +9,8 @@ import {v4 as uuid} from "uuid";
 import agent from './api-agent/agent';
 import LoadingSpinner from './Components/LoadingComponent/loading';
 import { useStore } from './Store/store';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react-lite';
 export type Activity= {
   id:string,
   description:string,
@@ -68,6 +70,8 @@ function App() {
   return (
     <div className="App">
 
+      <h2>{activityStore.title}</h2>
+      <button onClick={activityStore.setTitle}>Click to add ok to the title</button>
       <Navbar 
       createOrEditActivityHandlar={createOrEditActivityHandlar}
       />
@@ -87,4 +91,4 @@ DeleteActivity={DeleteActivity}
   );
 }
 
-export default App;
+export default observer(App);
