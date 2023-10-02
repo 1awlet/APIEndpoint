@@ -5,6 +5,7 @@ import "./style.css";
 import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useStore } from "../../Store/store";
+import { observer } from "mobx-react-lite";
 type prop = {
     activities: Activity[],
     createOrEditActivityHandlar: (activity:Activity)=>void,
@@ -14,9 +15,9 @@ type prop = {
 
 
 
-const DashBoard = (
+export default observer( function DashBoard(
     { activities, createOrEditActivityHandlar,DeleteActivity }
-    : prop) => {
+    : prop) {
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
@@ -49,7 +50,7 @@ const DashBoard = (
             }
 
             {
-                activityStore.selectedActivity && 
+             activityStore.selectedActivity &&
                 <Details 
                 createOrEditActivityHandlar={createOrEditActivityHandlar}
                 />
@@ -58,6 +59,6 @@ const DashBoard = (
         </div>
     )
 }
+)
 
 
-export default DashBoard;

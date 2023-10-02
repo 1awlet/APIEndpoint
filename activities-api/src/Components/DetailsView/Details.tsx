@@ -29,9 +29,6 @@ const Details = ({createOrEditActivityHandlar }:prop)=>{
    
 
 
-   console.log( activityStore.selectedActivity)
-    
-
     return(
         <>
             <div className= {activityStore.editMode ?  "detailsContainter hideDetails" : "detailsContainter"}>
