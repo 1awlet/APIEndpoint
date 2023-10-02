@@ -4,6 +4,7 @@ import SingleActivity from "../SingleActivity/activity";
 import "./style.css";
 import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
+import { useStore } from "../../Store/store";
 type prop = {
     activities: Activity[],
     createOrEditActivityHandlar: (activity:Activity)=>void,
@@ -19,7 +20,8 @@ const DashBoard = (
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
-
+    
+    const {activityStore} = useStore();
     const searchHandlar = (event: any) => {
         const value = event.target.value;
         setUserInput(value);
@@ -29,10 +31,7 @@ const DashBoard = (
         setSelectedEvent(undefined);
     }
   
-    const handleSelectedActivity = (id: string) => {
-      const getEvent = filteredData.find((event) => event.id == id);
-      setSelectedEvent(getEvent);
-    }
+  
 
     return (
         <div>
@@ -42,7 +41,6 @@ const DashBoard = (
                 <div className="All-activites" key={item.id}>
                     <SingleActivity 
                     activity={item} 
-                    selectEvent={handleSelectedActivity}
                     DeleteActivity={DeleteActivity}
                     />     
                     </div>
@@ -51,10 +49,8 @@ const DashBoard = (
             }
 
             {
-                selectedEvent && 
+                activityStore.selectedActivity && 
                 <Details 
-                activities={selectedEvent} 
-                CancelSelectedEvent={CancelSelectedEvent}
                 createOrEditActivityHandlar={createOrEditActivityHandlar}
                 />
             }

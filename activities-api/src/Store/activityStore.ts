@@ -35,6 +35,7 @@ export default class ActivityStore{
     }
 
     setSelectedActivity = (id:string)=>{
+        console.log(id)
         this.selectedActivity= this.activities.find((activity)=> activity.id == id);
     }
 

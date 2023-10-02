@@ -6,7 +6,7 @@ import { ChangeEvent } from "react";
 import { FormEvent } from "react";
 
 type prop ={
-    activities:Activity,
+    activities:Activity | undefined ,
     CancelEditing:()=> void,
     createOrEditActivityHandlar: (activity:Activity)=> void
 }

@@ -3,9 +3,9 @@ import boardImg from "../../Assets/Images/board.jpeg"
 import { Activity } from "../../App";
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useState } from "react";
+import { useStore } from "../../Store/store";
 type prop ={
-    activities:Activity,
-    CancelSelectedEvent: ()=> void,
+  
     createOrEditActivityHandlar:(activity:Activity)=> void,
   
     
@@ -13,29 +13,33 @@ type prop ={
 }
 
 
-const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar }:prop)=>{
-    const [isEditOn, setIsEditOn] = useState(false);
+const Details = ({createOrEditActivityHandlar }:prop)=>{
 
+    const [isEditOn, setIsEditOn] = useState(false);
+    const {activityStore} = useStore()
+    const {selectedActivity}= activityStore;
     const CancelEditing = ()=>{
         setIsEditOn(false)
       }
     
+
     const setEditOn = ()=>{
           setIsEditOn(true)
     }
    
-    const {id, description,title, venue}= activities;
 
+
+   console.log( activityStore.selectedActivity)
     
 
     return(
         <>
-            <div className= {isEditOn ?  "detailsContainter hideDetails" : "detailsContainter"}>
+            <div className= {activityStore.editMode ?  "detailsContainter hideDetails" : "detailsContainter"}>
                 <img src={boardImg} />
-                <h3>{title}</h3>
-                <p> 03-december-2023</p>
-                <p>{venue}</p>
-                <p>{description}</p>
+                <h3>{selectedActivity?.title}</h3>
+                <p> {selectedActivity?.date}</p>
+                <p>{selectedActivity?.venue}</p>
+                <p>{selectedActivity?.description}</p>
 
                 <div className="detailsbtns">
         <button 
@@ -44,7 +48,7 @@ const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar }:
         >  
                   Edit  </button>
         <button 
-        onClick={CancelSelectedEvent} 
+     
         className="cancel">    
         Cancel  
         </button>
@@ -52,7 +56,7 @@ const Details = ({activities, CancelSelectedEvent,createOrEditActivityHandlar }:
                 </div>
 
             </div>
-          { isEditOn && <EditForm activities ={activities} CancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
+          { isEditOn && <EditForm activities ={selectedActivity} CancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
            </> 
     )
 }

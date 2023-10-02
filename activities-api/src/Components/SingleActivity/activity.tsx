@@ -1,13 +1,15 @@
 import { Activity } from "../../App";
+import { useStore } from "../../Store/store";
 import './style.css'
 type Props = {
   activity: Activity,
-  selectEvent: (id: string) => void,
   DeleteActivity: (activityId: string)=> void
 }
 
-const SingleActivity = ({ activity, selectEvent,DeleteActivity }: Props) => {
+const SingleActivity = ({ activity,DeleteActivity }: Props) => {
   let { id, title, date, description } = activity;
+  const {activityStore} = useStore();
+
   return (
 
     <div key={id} className="activity-container">
@@ -16,7 +18,7 @@ const SingleActivity = ({ activity, selectEvent,DeleteActivity }: Props) => {
       <p className="date-added">{date}</p>
       <p className="description">{description}</p>
 
-      <button onClick={() => selectEvent(id)} className="read-more-button">Read More</button>
+      <button onClick={()=> activityStore.setSelectedActivity(id)} className="read-more-button">Read More</button>
       <button className="deleteButton" onClick={()=> DeleteActivity(id)}>
         Remove </button>
     </div>
