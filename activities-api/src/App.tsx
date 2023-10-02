@@ -25,22 +25,15 @@ export type Activity= {
 function App() {
   const {activityStore} = useStore()
   const [activities, setactivities]= useState<Activity[]>([]);
-  const [filteredData, setFilteredData] = useState(activities);
-
+  const [filteredData, setFilteredData] = useState(activityStore.activities);
   const [userInput,setUserInput]= useState("");
   const [isLoading, setIsLoading]= useState(true);
+
+
   useEffect(()=>{
-    agent.activitiesCrud.list().then((res)=> {
-      let activitiesEdited:Activity[]=[]
-      res.forEach((activity)=>{
-        activity.date= activity.date.split("T")[0]
-        activitiesEdited.push(activity)
-      })
-    setactivities(activitiesEdited) 
-    setIsLoading(false)
-   }
-   )
-  },[])
+   activityStore.fetchActivities()
+   
+  },[activityStore])
 
  
 
@@ -69,18 +62,15 @@ function App() {
 
   return (
     <div className="App">
-
-      <h2>{activityStore.title}</h2>
-      <button onClick={activityStore.setTitle}>Click to add ok to the title</button>
-      <Navbar 
+     <Navbar 
       createOrEditActivityHandlar={createOrEditActivityHandlar}
       />
-{isLoading ? 
+{activityStore.loadingActivities ? 
 <LoadingSpinner />
 
 :
 <DashBoard 
-activities={activities}  
+activities={activityStore.activities}  
 createOrEditActivityHandlar={createOrEditActivityHandlar}
 DeleteActivity={DeleteActivity}
 

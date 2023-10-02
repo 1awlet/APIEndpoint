@@ -33,23 +33,12 @@ const DashBoard = (
       const getEvent = filteredData.find((event) => event.id == id);
       setSelectedEvent(getEvent);
     }
-    useEffect(() => {
-        const newFiltered = activities.filter((item) => {
-            return item.title.toLocaleLowerCase().includes(userInput.toLowerCase());
-        }
-        )
-        setFilteredData(newFiltered)
-    }, [userInput, activities])
 
     return (
         <div>
-            <div className='SearchBar'>
-                <h3>Search for activity</h3>
-                <input type='text' onChange={searchHandlar} />
-            </div>
-
+          
             {
-            filteredData.map((item) => (
+            activities.map((item) => (
                 <div className="All-activites" key={item.id}>
                     <SingleActivity 
                     activity={item} 
