@@ -32,8 +32,6 @@ export default observer( function DashBoard(
         setSelectedEvent(undefined);
     }
   
-  
-
     return (
         <div>
           

@@ -51,4 +51,8 @@ export default class ActivityStore{
     closeForm= ()=>{
         this.editMode=false
     }
+
+    openEditMode = ()=>{
+        this.editMode=true;
+    }
 }

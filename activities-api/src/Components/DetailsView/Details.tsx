@@ -27,11 +27,12 @@ const Details = ({createOrEditActivityHandlar }:prop)=>{
           setIsEditOn(true)
     }
    
+    console.log(activityStore.editMode)
 
 
     return(
         <>
-            <div className= {activityStore.editMode ?  "detailsContainter hideDetails" : "detailsContainter"}>
+            <div className= {"detailsContainter"}>
                 <img src={boardImg} />
                 <h3>{selectedActivity?.title}</h3>
                 <p> {selectedActivity?.date}</p>
@@ -40,12 +41,12 @@ const Details = ({createOrEditActivityHandlar }:prop)=>{
 
                 <div className="detailsbtns">
         <button 
-        onClick={setEditOn } 
+        onClick={()=> activityStore.openForm()} 
         className="edit"
         >  
                   Edit  </button>
         <button 
-     
+        onClick={activityStore.cancellActivity}
         className="cancel">    
         Cancel  
         </button>
@@ -53,7 +54,7 @@ const Details = ({createOrEditActivityHandlar }:prop)=>{
                 </div>
 
             </div>
-          { isEditOn && <EditForm activities ={selectedActivity} CancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
+          { activityStore.editMode&& <EditForm activities ={selectedActivity} CancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
            </> 
     )
 }
