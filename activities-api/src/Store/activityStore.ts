@@ -4,7 +4,8 @@ import agent from "../api-agent/agent";
 export default class ActivityStore{
     activities:Activity[] = [];
     loadingActivities=false;
-
+    selectedActivity: Activity | undefined = undefined;
+    editMode = false
     constructor(){
         makeAutoObservable(this)
     }
@@ -31,6 +32,22 @@ export default class ActivityStore{
 
     setLoadingState = (state:boolean)=>{
         this.loadingActivities=state;
+    }
 
+    setSelectedActivity = (id:string)=>{
+        this.selectedActivity= this.activities.find((activity)=> activity.id == id);
+    }
+
+    cancellActivity = ()=>{
+        this.selectedActivity= undefined;
+    }
+
+    openForm = (id?:string)=>{
+        id ? this.setSelectedActivity(id) : this.cancellActivity()
+        this.editMode=true
+    }
+
+    closeForm= ()=>{
+        this.editMode=false
     }
 }
