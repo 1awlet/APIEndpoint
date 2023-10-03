@@ -41,7 +41,7 @@ const Details = ({createOrEditActivityHandlar }:prop)=>{
 
                 <div className="detailsbtns">
         <button 
-        onClick={()=> activityStore.openForm()} 
+        onClick={()=> activityStore.openForm(selectedActivity?.id)} 
         className="edit"
         >  
                   Edit  </button>
