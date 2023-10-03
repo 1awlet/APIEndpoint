@@ -54,7 +54,7 @@ const Details = ({createOrEditActivityHandlar }:prop)=>{
                 </div>
 
             </div>
-          { activityStore.editMode&& <EditForm activities ={selectedActivity} CancelEditing={CancelEditing} createOrEditActivityHandlar={createOrEditActivityHandlar} /> } 
+   
            </> 
     )
 }

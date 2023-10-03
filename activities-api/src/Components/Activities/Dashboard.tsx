@@ -54,6 +54,10 @@ export default observer( function DashBoard(
                 />
             }
 
+            {
+                activityStore.editMode&& <EditForm activities ={activityStore.selectedActivity}  createOrEditActivityHandlar={createOrEditActivityHandlar} />
+            }
+
         </div>
     )
 }

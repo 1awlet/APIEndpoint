@@ -4,14 +4,14 @@ import "./style.css";
 import { channel } from "diagnostics_channel";
 import { ChangeEvent } from "react";
 import { FormEvent } from "react";
+import { useStore } from "../../Store/store";
 
 type prop ={
     activities:Activity | undefined ,
-    CancelEditing:()=> void,
     createOrEditActivityHandlar: (activity:Activity)=> void
 }
 
-const EditForm = ({activities:selectedActivity,CancelEditing, createOrEditActivityHandlar}:prop)=>{
+const EditForm = ({activities:selectedActivity, createOrEditActivityHandlar}:prop)=>{
     const initialState =  selectedActivity ?? {
     id:"",
     description: "",
@@ -20,6 +20,7 @@ const EditForm = ({activities:selectedActivity,CancelEditing, createOrEditActivi
     date: "",
     
     }
+    const {activityStore}= useStore()
     const [activity, setActivity] = useState(initialState)
 
     const submitHandlar = (event:FormEvent)=>{
@@ -43,7 +44,7 @@ const EditForm = ({activities:selectedActivity,CancelEditing, createOrEditActivi
             <input placeholder="venue" type="date" value={activity.date} name="date" onChange={changeHandlar}/>
            
            <div> 
-             <button onClick={CancelEditing} type="button" className="cancel">Cancel </button>
+             <button onClick={activityStore.closeForm} type="button" className="cancel">Cancel </button>
             <button className="submitbtn" type="submit"> Submit </button>
             </div>
             </div>
