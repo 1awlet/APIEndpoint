@@ -48,7 +48,7 @@ export default observer( function DashBoard(
             }
 
             {
-             activityStore.selectedActivity &&
+             activityStore.selectedActivity &&  activityStore.editMode==false &&
                 <Details 
                 createOrEditActivityHandlar={createOrEditActivityHandlar}
                 />
