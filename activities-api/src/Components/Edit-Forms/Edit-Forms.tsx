@@ -5,13 +5,14 @@ import { channel } from "diagnostics_channel";
 import { ChangeEvent } from "react";
 import { FormEvent } from "react";
 import { useStore } from "../../Store/store";
+import { observer } from "mobx-react-lite";
 
 type prop ={
     activities:Activity | undefined ,
     createOrEditActivityHandlar: (activity:Activity)=> void
 }
 
-const EditForm = ({activities:selectedActivity, createOrEditActivityHandlar}:prop)=>{
+const EditForm = observer(({activities:selectedActivity, createOrEditActivityHandlar}:prop)=>{
     const initialState =  selectedActivity ?? {
     id:"",
     description: "",
@@ -21,11 +22,12 @@ const EditForm = ({activities:selectedActivity, createOrEditActivityHandlar}:pro
     
     }
     const {activityStore}= useStore()
+    const {createActivity}=activityStore;
     const [activity, setActivity] = useState(initialState)
 
     const submitHandlar = (event:FormEvent)=>{
         event.preventDefault();
-        createOrEditActivityHandlar(activity)
+        activityStore.createActivity(activity) 
 
     }
     const changeHandlar = (event:ChangeEvent<HTMLInputElement>)=>{
@@ -52,6 +54,6 @@ const EditForm = ({activities:selectedActivity, createOrEditActivityHandlar}:pro
         </div>
     )
 
-}
+})
 
 export default EditForm;
