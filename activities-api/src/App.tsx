@@ -24,7 +24,6 @@ export type Activity= {
 
 function App() {
   const {activityStore} = useStore()
-  const [activities, setactivities]= useState<Activity[]>([]);
   const [filteredData, setFilteredData] = useState(activityStore.activities);
   const [userInput,setUserInput]= useState("");
   const [isLoading, setIsLoading]= useState(true);
@@ -35,26 +34,25 @@ function App() {
 
   },[activityStore])
 
- 
+  const {activities} =activityStore;
 
 
   const createOrEditActivityHandlar = async (activity:Activity)=>{
-    const updateActivity =[...activities.filter((x)=> x.id != activity.id), activity]
-    if(activity.id){
+        if(activity.id){
       await agent.activitiesCrud.update(activity)
-      setactivities(updateActivity)
+
   
     }else{
       activity.id= uuid();
       await agent.activitiesCrud.add(activity)
-      setactivities([...activities, activity])
+     
     }
 
   }
   const DeleteActivity = (activityId:string)=>{
     const updatedActivity = activities.filter((x)=> x.id !== activityId );
     agent.activitiesCrud.delete(activityId)
-    setactivities(updatedActivity)
+   
   }
  
 

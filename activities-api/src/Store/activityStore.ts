@@ -1,6 +1,7 @@
-import {makeAutoObservable, makeObservable, observable} from "mobx"
+import {makeAutoObservable, makeObservable, observable, runInAction} from "mobx"
 import { Activity } from "../App";
 import agent from "../api-agent/agent";
+import {v4 as uuid} from "uuid";
 export default class ActivityStore{
     activities:Activity[] = [];
     loadingActivities=false;
@@ -54,5 +55,22 @@ export default class ActivityStore{
 
     openEditMode = ()=>{
         this.editMode=true;
+    }
+
+
+
+    createActivity = async (activity:Activity)=>{
+        activity.id= uuid()
+        try {
+            await agent.activitiesCrud.add(activity)
+            runInAction(()=>{
+                this.activities.push(activity)
+                this.selectedActivity=activity;
+                this.editMode=false;
+            })
+        } catch (error) {
+            console.log(Error)
+            this.selectedActivity=undefined;
+        }
     }
 }
