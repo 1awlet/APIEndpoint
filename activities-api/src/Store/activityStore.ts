@@ -76,7 +76,7 @@ export default class ActivityStore{
 
 
     updateActivity = async(activity:Activity)=>{
-
+        console.log(activity)
         try {
             agent.activitiesCrud.update(activity);
             runInAction(()=>{

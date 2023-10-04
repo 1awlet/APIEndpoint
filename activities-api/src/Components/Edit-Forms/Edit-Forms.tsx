@@ -27,7 +27,14 @@ const EditForm = observer(({activities:selectedActivity, createOrEditActivityHan
 
     const submitHandlar = (event:FormEvent)=>{
         event.preventDefault();
-        activityStore.createActivity(activity) 
+        if(activity.id.length > 0){
+            activityStore.updateActivity(activity)
+        }else{
+
+            activityStore.createActivity(activity) 
+
+        }
+   
 
     }
     const changeHandlar = (event:ChangeEvent<HTMLInputElement>)=>{
@@ -39,7 +46,7 @@ const EditForm = observer(({activities:selectedActivity, createOrEditActivityHan
             <form onSubmit={submitHandlar} > 
                
             <div className="editFormContainer">
-            <h3>Edit for event with the id {activity.id}</h3>
+       
             <input placeholder="Title" value={activity.title} name="title" onChange={changeHandlar} />
             <input placeholder="Description" value={activity.description} name="description" onChange={changeHandlar}/>
             <input placeholder="venue" value={activity.venue} name="venue" onChange={changeHandlar}/>
