@@ -73,4 +73,23 @@ export default class ActivityStore{
             this.selectedActivity=undefined;
         }
     }
+
+
+    updateActivity = async(activity:Activity)=>{
+
+        try {
+            agent.activitiesCrud.update(activity);
+            runInAction(()=>{
+                this.activities=[...this.activities.filter((x)=>x.id != activity.id), activity]
+                this.editMode=false;
+                this.selectedActivity=activity;
+            })
+        } catch (error) {
+            console.log(error)
+            runInAction(()=>{
+                this.selectedActivity= undefined;
+
+            })
+        }
+    }
 }
