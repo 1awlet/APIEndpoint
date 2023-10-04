@@ -76,7 +76,7 @@ export default class ActivityStore{
 
 
     updateActivity = async(activity:Activity)=>{
-        console.log(activity)
+
         try {
             agent.activitiesCrud.update(activity);
             runInAction(()=>{
@@ -86,10 +86,23 @@ export default class ActivityStore{
             })
         } catch (error) {
             console.log(error)
-            runInAction(()=>{
-                this.selectedActivity= undefined;
-
-            })
+        
         }
+    }
+
+
+    deleteActivity = async(id:string)=>{
+
+        try {
+            agent.activitiesCrud.delete(id);
+            runInAction(()=>{
+                this.activities=this.activities.filter(x => x.id != id)
+                this.editMode=false;
+                this.selectedActivity=undefined;
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }
