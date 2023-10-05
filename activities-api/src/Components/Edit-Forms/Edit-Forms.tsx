@@ -15,7 +15,7 @@ export type Activity= {
   
   }
 type prop ={
-    activities:Activity | undefined 
+    activities?:Activity | undefined 
 }
 
 const EditForm = observer(({activities:selectedActivity}:prop)=>{

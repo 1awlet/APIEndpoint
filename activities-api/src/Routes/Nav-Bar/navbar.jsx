@@ -30,14 +30,10 @@ const Navbar = observer(({createOrEditActivityHandlar})=>{
       <ul className="navbar-menu">
        <Link to={"/act"}> <li>Activitss</li> </Link>
         <li>About</li>
-        <li className="libtns" onClick={()=> activityStore.openForm()}> Add Activity </li>
+        <Link to={"/add"}> <li className="libtns"> Add Activity </li> </Link>
       </ul>
     </nav>
-    {  activityStore.editMode&&  
-    <EditForm 
-    CancelEditing={hideAddActivityOn}
-    /> } 
-    
+
     <Outlet />
     </>
 )
