@@ -30,11 +30,9 @@ export default class ActivityStore{
    
     }
 
-
     setLoadingState = (state:boolean)=>{
         this.loadingActivities=state;
     }
-
     setSelectedActivity = (id:string)=>{
         console.log(id)
         this.selectedActivity= this.activities.find((activity)=> activity.id == id);
@@ -57,16 +55,16 @@ export default class ActivityStore{
         this.editMode=true;
     }
 
-
-
     createActivity = async (activity:Activity)=>{
         activity.id= uuid()
+        this.setLoadingState(true)
         try {
             await agent.activitiesCrud.add(activity)
             runInAction(()=>{
                 this.activities.push(activity)
                 this.selectedActivity=activity;
                 this.editMode=false;
+                this.setLoadingState(false)
             })
         } catch (error) {
             console.log(Error)
@@ -76,13 +74,14 @@ export default class ActivityStore{
 
 
     updateActivity = async(activity:Activity)=>{
-
+        this.setLoadingState(true)
         try {
             agent.activitiesCrud.update(activity);
             runInAction(()=>{
                 this.activities=[...this.activities.filter((x)=>x.id != activity.id), activity]
                 this.editMode=false;
                 this.selectedActivity=activity;
+                this.setLoadingState(false)
             })
         } catch (error) {
             console.log(error)
@@ -90,15 +89,15 @@ export default class ActivityStore{
         }
     }
 
-
     deleteActivity = async(id:string)=>{
-
+        this.setLoadingState(true)
         try {
             agent.activitiesCrud.delete(id);
             runInAction(()=>{
                 this.activities=this.activities.filter(x => x.id != id)
                 this.editMode=false;
                 this.selectedActivity=undefined;
+                this.setLoadingState(false)
             })
         } catch (error) {
             console.log(error)

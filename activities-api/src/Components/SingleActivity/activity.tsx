@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import { Activity } from "../../App";
 import { useStore } from "../../Store/store";
 import './style.css'
@@ -6,7 +7,7 @@ type Props = {
   DeleteActivity: (activityId: string)=> void
 }
 
-const SingleActivity = ({ activity,DeleteActivity }: Props) => {
+const SingleActivity = observer(({ activity,DeleteActivity }: Props) => {
   let { id, title, date, description } = activity;
   const {activityStore} = useStore();
 
@@ -19,13 +20,13 @@ const SingleActivity = ({ activity,DeleteActivity }: Props) => {
       <p className="description">{description}</p>
 
       <button onClick={()=> activityStore.setSelectedActivity(id)} className="read-more-button">Read More</button>
-      <button className="deleteButton" onClick={()=> DeleteActivity(id)}>
+      <button className="deleteButton" onClick={()=> activityStore.deleteActivity(id)}>
         Remove </button>
     </div>
 
 
 
   )
-}
+})
 
 export default SingleActivity;
