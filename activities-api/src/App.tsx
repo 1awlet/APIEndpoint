@@ -68,7 +68,6 @@ function App() {
       <Routes>
        <Route path='/' element={<Navbar />} > 
        <Route index element={<Test />} />
-       
        <Route path='add/:activityId?' element={<EditForm />} />
        <Route path='selectedActivity/:activityID' element={<Details />}/>
        <Route path='/act' element={<DashBoard />} />

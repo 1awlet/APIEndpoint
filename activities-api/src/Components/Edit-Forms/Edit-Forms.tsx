@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 
 import "./style.css";
 import { channel } from "diagnostics_channel";
@@ -37,12 +37,26 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
     const [activity, setActivity] = useState(initialState)
     const Navigate = useNavigate()
 
+    useEffect(()=>{
+      
+            const findActivity= activityStore.activities.find(x => x.id == activityId);
+            if(findActivity){
+                setActivity(findActivity)
+        }
+        
+    },[])
+
     const submitHandlar = (event:FormEvent)=>{
         event.preventDefault();
         if(activityId){
-            activityStore.updateActivity(activity)
+            activityStore.updateActivity(activity).then(()=>{
+                Navigate(`/selectedActivity/${activityId}`) 
+            })
         }else{
-            activityStore.createActivity(activity) 
+            activityStore.createActivity(activity).then(()=>{
+                Navigate(`/selectedActivity/${activityId}`) 
+            }) 
+
         }
    
 
