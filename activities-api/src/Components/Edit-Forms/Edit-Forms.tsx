@@ -6,6 +6,7 @@ import { ChangeEvent } from "react";
 import { FormEvent } from "react";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
+import { useParams } from "react-router-dom";
 export type Activity= {
     id:string,
     description:string,
@@ -27,18 +28,20 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
     date: "",
     
     }
+
+    const {activityId} = useParams();
+
+    console.log(activityId)
     const {activityStore}= useStore()
     const {createActivity}=activityStore;
     const [activity, setActivity] = useState(initialState)
 
     const submitHandlar = (event:FormEvent)=>{
         event.preventDefault();
-        if(activity.id.length > 0){
+        if(activityId){
             activityStore.updateActivity(activity)
         }else{
-
             activityStore.createActivity(activity) 
-
         }
    
 
@@ -52,7 +55,7 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
             <form onSubmit={submitHandlar} > 
                
             <div className="editFormContainer">
-       
+            
             <input placeholder="Title" value={activity.title} name="title" onChange={changeHandlar} />
             <input placeholder="Description" value={activity.description} name="description" onChange={changeHandlar}/>
             <input placeholder="venue" value={activity.venue} name="venue" onChange={changeHandlar}/>

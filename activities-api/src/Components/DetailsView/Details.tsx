@@ -4,6 +4,7 @@ import boardImg from "../../Assets/Images/board.jpeg"
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useState } from "react";
 import { useStore } from "../../Store/store";
+import { useParams } from "react-router-dom";
 export type Activity= {
     id:string,
     description:string,
@@ -30,6 +31,7 @@ const Details = ( )=>{
         setIsEditOn(false)
       }
     
+      const {activityID} = useParams();
 
     const setEditOn = ()=>{
           setIsEditOn(true)
@@ -46,7 +48,7 @@ const Details = ( )=>{
                 <p> {selectedActivity?.date}</p>
                 <p>{selectedActivity?.venue}</p>
                 <p>{selectedActivity?.description}</p>
-
+§
                 <div className="detailsbtns">
         <button 
         onClick={()=> activityStore.openForm(selectedActivity?.id)} 

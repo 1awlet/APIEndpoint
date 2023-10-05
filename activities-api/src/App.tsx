@@ -14,6 +14,7 @@ import { observer } from 'mobx-react-lite';
 import { Route, Router, Routes } from 'react-router-dom';
 import Test from './Components/test';
 import EditForm from './Components/Edit-Forms/Edit-Forms';
+import Details from './Components/DetailsView/Details';
 export type Activity= {
   id:string,
   description:string,
@@ -68,7 +69,8 @@ function App() {
        <Route path='/' element={<Navbar />} > 
        <Route index element={<Test />} />
        <Route path='/act' element={<DashBoard />} />
-       <Route path='/add' element={<EditForm />} />
+       <Route path='/add/:activityId?' element={<EditForm />} />
+       <Route path='/act/selectedActivity/:activityID' element={<Details />}/>
        </Route>
       </Routes>
      

@@ -2,6 +2,8 @@ import { observer } from "mobx-react-lite";
 
 import { useStore } from "../../Store/store";
 import './style.css'
+import { useNavigate } from "react-router-dom";
+
 export type Activity= {
   id:string,
   description:string,
@@ -18,7 +20,11 @@ type Props = {
 const SingleActivity = observer(({ activity }: Props) => {
   let { id, title, date, description } = activity;
   const {activityStore} = useStore();
-
+  const Navigate = useNavigate();
+  const handleSelectActivity = async ()=>{
+    await activityStore.openForm(id)
+    Navigate(`selectedActivity/${id}`)
+  }
   return (
 
     <div key={id} className="activity-container">
@@ -27,7 +33,7 @@ const SingleActivity = observer(({ activity }: Props) => {
       <p className="date-added">{date}</p>
       <p className="description">{description}</p>
 
-      <button onClick={()=> activityStore.setSelectedActivity(id)} className="read-more-button">Read More</button>
+      <button onClick={handleSelectActivity } className="read-more-button">Read More</button>
       <button className="deleteButton" onClick={()=> activityStore.deleteActivity(id)}>
         Remove </button>
     </div>
