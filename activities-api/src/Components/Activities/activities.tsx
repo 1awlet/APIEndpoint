@@ -1,23 +1,27 @@
 import { useState, useEffect } from "react";
-import { Activity } from '../../App';
+
 import SingleActivity from "../SingleActivity/activity";
 import "./style.css";
 import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
+export type Activity= {
+    id:string,
+    description:string,
+    title:string,
+    venue:string,
+    date:string
+  
+  }
 type prop = {
     activities: Activity[],
-    createOrEditActivityHandlar: (activity:Activity)=>void,
 
-    DeleteActivity: (activityId:string)=> void
 }
 
 
 
-export default observer( function DashBoard(
-    { activities, createOrEditActivityHandlar,DeleteActivity }
-    : prop) {
+const  Activities = observer(({activities}: prop)=>  {
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
@@ -40,7 +44,6 @@ export default observer( function DashBoard(
                 <div className="All-activites" key={item.id}>
                     <SingleActivity 
                     activity={item} 
-                    DeleteActivity={DeleteActivity}
                     />     
                     </div>
 
@@ -50,17 +53,18 @@ export default observer( function DashBoard(
             {
              activityStore.selectedActivity &&  activityStore.editMode==false &&
                 <Details 
-                createOrEditActivityHandlar={createOrEditActivityHandlar}
                 />
             }
 
             {
-                activityStore.editMode&& <EditForm activities ={activityStore.selectedActivity}  createOrEditActivityHandlar={createOrEditActivityHandlar} />
+                activityStore.editMode&& 
+                <EditForm 
+                activities ={activityStore.selectedActivity} 
+                 />
             }
 
         </div>
     )
-}
-)
+})
 
-
+export default Activities;

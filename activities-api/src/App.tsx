@@ -4,13 +4,15 @@ import './App.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Routes/Nav-Bar/navbar';
-import DashBoard from './Components/Activities/Dashboard';
+import DashBoard from './Components/DashBoard/dashBoard';
 import {v4 as uuid} from "uuid";
 import agent from './api-agent/agent';
 import LoadingSpinner from './Components/LoadingComponent/loading';
 import { useStore } from './Store/store';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
+import { Route, Router, Routes } from 'react-router-dom';
+import Test from './Components/test';
 export type Activity= {
   id:string,
   description:string,
@@ -60,20 +62,13 @@ function App() {
 
   return (
     <div className="App">
-     <Navbar 
- 
-      />
-{activityStore.loadingActivities ? 
-<LoadingSpinner />
 
-:
-<DashBoard 
-activities={activityStore.activities}  
-createOrEditActivityHandlar={createOrEditActivityHandlar}
-DeleteActivity={DeleteActivity}
-
-/>
-}
+      <Routes>
+       <Route path='/' element={<Navbar />} > 
+       <Route index element={<Test />} />
+       <Route path='/act' element={<DashBoard />} />
+       </Route>
+      </Routes>
      
     </div>
   );

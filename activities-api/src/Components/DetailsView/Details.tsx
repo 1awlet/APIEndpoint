@@ -1,9 +1,17 @@
 import "./style.css"
 import boardImg from "../../Assets/Images/board.jpeg"
-import { Activity } from "../../App";
+
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useState } from "react";
 import { useStore } from "../../Store/store";
+export type Activity= {
+    id:string,
+    description:string,
+    title:string,
+    venue:string,
+    date:string
+  
+  }
 type prop ={
   
     createOrEditActivityHandlar:(activity:Activity)=> void,
@@ -13,7 +21,7 @@ type prop ={
 }
 
 
-const Details = ({createOrEditActivityHandlar }:prop)=>{
+const Details = ( )=>{
 
     const [isEditOn, setIsEditOn] = useState(false);
     const {activityStore} = useStore()

@@ -1,6 +1,13 @@
 import axios, { AxiosResponse } from "axios";
-import { Activity } from "../App";
 
+export type Activity= {
+    id:string,
+    description:string,
+    title:string,
+    venue:string,
+    date:string
+  
+  }
 const sleep = (delay:number)=>{
     return new Promise ((resolve)=>{
         setTimeout(resolve, delay)

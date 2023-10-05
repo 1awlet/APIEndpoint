@@ -7,7 +7,8 @@ import {v4 as uuid} from "uuid";
 import { Activity } from "../../App";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
-
+import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Navbar = observer(({createOrEditActivityHandlar})=>{
     const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ const Navbar = observer(({createOrEditActivityHandlar})=>{
       </div>
 
       <ul className="navbar-menu">
-        <li>Home</li>
+       <Link to={"/act"}> <li>Activitss</li> </Link>
         <li>About</li>
         <li className="libtns" onClick={()=> activityStore.openForm()}> Add Activity </li>
       </ul>
@@ -36,6 +37,8 @@ const Navbar = observer(({createOrEditActivityHandlar})=>{
     <EditForm 
     CancelEditing={hideAddActivityOn}
     /> } 
+    
+    <Outlet />
     </>
 )
 })

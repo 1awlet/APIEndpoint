@@ -1,18 +1,24 @@
 import { FormEventHandler, useState } from "react";
-import { Activity } from "../../App"
+
 import "./style.css";
 import { channel } from "diagnostics_channel";
 import { ChangeEvent } from "react";
 import { FormEvent } from "react";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
-
+export type Activity= {
+    id:string,
+    description:string,
+    title:string,
+    venue:string,
+    date:string
+  
+  }
 type prop ={
-    activities:Activity | undefined ,
-    createOrEditActivityHandlar: (activity:Activity)=> void
+    activities:Activity | undefined 
 }
 
-const EditForm = observer(({activities:selectedActivity, createOrEditActivityHandlar}:prop)=>{
+const EditForm = observer(({activities:selectedActivity}:prop)=>{
     const initialState =  selectedActivity ?? {
     id:"",
     description: "",

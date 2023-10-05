@@ -1,13 +1,21 @@
 import { observer } from "mobx-react-lite";
-import { Activity } from "../../App";
+
 import { useStore } from "../../Store/store";
 import './style.css'
+export type Activity= {
+  id:string,
+  description:string,
+  title:string,
+  venue:string,
+  date:string
+
+}
 type Props = {
-  activity: Activity,
-  DeleteActivity: (activityId: string)=> void
+  activity: Activity
 }
 
-const SingleActivity = observer(({ activity,DeleteActivity }: Props) => {
+
+const SingleActivity = observer(({ activity }: Props) => {
   let { id, title, date, description } = activity;
   const {activityStore} = useStore();
 
