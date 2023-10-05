@@ -4,7 +4,7 @@ import boardImg from "../../Assets/Images/board.jpeg"
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useState } from "react";
 import { useStore } from "../../Store/store";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export type Activity= {
     id:string,
     description:string,
@@ -36,9 +36,11 @@ const Details = ( )=>{
     const setEditOn = ()=>{
           setIsEditOn(true)
     }
-   
+   const Navigate = useNavigate()
     console.log(activityStore.editMode)
-
+    const handleForm= ()=>{
+        Navigate(`add/${activityID}?`)
+    }
 
     return(
         <>
@@ -51,7 +53,7 @@ const Details = ( )=>{
 §
                 <div className="detailsbtns">
         <button 
-        onClick={()=> activityStore.openForm(selectedActivity?.id)} 
+        onClick={ ()=> Navigate(`/add/${activityID}`)} 
         className="edit"
         >  
                   Edit  </button>

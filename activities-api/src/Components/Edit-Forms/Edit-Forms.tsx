@@ -6,7 +6,7 @@ import { ChangeEvent } from "react";
 import { FormEvent } from "react";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 export type Activity= {
     id:string,
     description:string,
@@ -35,6 +35,7 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
     const {activityStore}= useStore()
     const {createActivity}=activityStore;
     const [activity, setActivity] = useState(initialState)
+    const Navigate = useNavigate()
 
     const submitHandlar = (event:FormEvent)=>{
         event.preventDefault();
@@ -62,7 +63,7 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
             <input placeholder="venue" type="date" value={activity.date} name="date" onChange={changeHandlar}/>
            
            <div> 
-             <button onClick={activityStore.closeForm} type="button" className="cancel">Cancel </button>
+             <button onClick={()=>Navigate(`/selectedActivity/${activityId}`)} type="button" className="cancel">Cancel </button>
             <button className="submitbtn" type="submit"> Submit </button>
             </div>
             </div>

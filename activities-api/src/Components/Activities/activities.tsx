@@ -50,18 +50,6 @@ const  Activities = observer(({activities}: prop)=>  {
             ))
             }
 
-            {
-             activityStore.selectedActivity &&  activityStore.editMode==false &&
-                <Details 
-                />
-            }
-
-            {
-                activityStore.editMode&& 
-                <EditForm 
-                activities ={activityStore.selectedActivity} 
-                 />
-            }
 
         </div>
     )
