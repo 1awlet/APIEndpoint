@@ -1,97 +1,51 @@
-import "./style.css"
-import boardImg from "../../Assets/Images/board.jpeg"
+import React, { useEffect } from "react";
 
-import EditForm from "../Edit-Forms/Edit-Forms";
-import { useEffect, useState } from "react";
-import { useStore } from "../../Store/store";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-export type Activity= {
-    id:string,
-    description:string,
-    title:string,
-    venue:string,
-    date:string
-  
+import { useStore } from "../../Store/store";
+import "./style.css";
+import boardImg from "../../Assets/Images/board.jpeg";
+
+const Details= observer(() => {
+  const { activityStore } = useStore();
+  const { activityID } = useParams<{ activityID: string }>();
+  const Navigate = useNavigate();
+
+
+
+  const activity = activityStore.activities.find(x=> x.id == activityID)
+
+  if (!activity) {
+    return null; 
   }
-type prop ={
-  
-    createOrEditActivityHandlar:(activity:Activity)=> void,
-  
-    
 
-}
+  const handleEditClick = () => {
+    Navigate(`/add/${activityID}`);
+  };
 
+  const handleCancelClick = () => {
+    Navigate("/act");
+  };
 
-const Details = observer(( )=>{
+  return (
 
-    const [isEditOn, setIsEditOn] = useState(false);
-    const {activityStore} = useStore()
-    const {activityID} = useParams();
-    const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>()
-    //const {selectedActivity}= activityStore;
-    const CancelEditing = ()=>{
-        setIsEditOn(false)
-      }
- 
-     
-      useEffect(()=>{
-        const chosenActivity = activityStore.activities.find(x=> x.id ==activityID)
-        setSelectedActivity(chosenActivity)
-      },[])
+    <div className="detailsContainter">
+      <img src={boardImg} alt="Activity" />
+      <h3>{activity.title}</h3>
+      <p>{activity.date}</p>
+      <p>{activity.venue}</p>
+      <p>{activity.description}</p>
 
-    const setEditOn = ()=>{
-          setIsEditOn(true)
-    }
-   const Navigate = useNavigate()
-    console.log(activityStore.editMode)
-    const handleForm= ()=>{
-        Navigate(`add/${activityID}?`)
-    }
-
-    return(
-        <>
-
-
-      {
-        activityID ? 
-          activityStore.activities.map((activity)=>{
-            if(activity.id == activityID){
-              return(
-                <div className= {"detailsContainter"}>
-            <img src={boardImg} />
-            <h3>{activity.title}</h3>
-            <p> {activity.date}</p>
-            <p>{activity.venue}</p>
-            <p>{activity.description}</p>
-
-            <div className="detailsbtns">
-    <button 
-    onClick={ ()=> Navigate(`/add/${activityID}`)} 
-    className="edit"
-    >  
-              Edit  </button>
-    <button 
-    onClick={activityStore.cancellActivity}
-    className="cancel">    
-    Cancel  
-    </button>
-
-  </div>
-  </div>
-              )
-            }
-           
-          })
-
-          :
-          <>
-          </>
-      }
-      
-        </> 
-    )
-})
-
+      <div className="detailsbtns">
+        <button onClick={handleEditClick} className="edit">
+          Edit
+        </button>
+        <button onClick={handleCancelClick} className="cancel">
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+});
 
 export default Details;
