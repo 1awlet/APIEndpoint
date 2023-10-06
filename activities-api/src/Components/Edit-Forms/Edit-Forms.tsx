@@ -7,6 +7,7 @@ import { FormEvent } from "react";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from "react-router-dom";
+import FormInput from "../FormInputs/formInputs";
 export type Activity= {
     id:string,
     description:string,
@@ -30,13 +31,14 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
     }
 
     const {activityId} = useParams();
-
+    
     console.log(activityId)
     const {activityStore}= useStore()
     const {createActivity}=activityStore;
     const [activity, setActivity] = useState(initialState)
     const Navigate = useNavigate()
 
+    const getActivity:Activity | undefined = activityStore.activities.find((x:Activity)=> x.id ==activityId)
     useEffect(()=>{
       
             const findActivity= activityStore.activities.find(x => x.id == activityId);
@@ -44,44 +46,30 @@ const EditForm = observer(({activities:selectedActivity}:prop)=>{
                 setActivity(findActivity)
         }
         
-    },[])
+    },[activityId,activityStore])
 
-    const submitHandlar = (event:FormEvent)=>{
-        event.preventDefault();
-        if(activityId){
-            activityStore.updateActivity(activity).then(()=>{
-                Navigate(`/selectedActivity/${activityId}`) 
-            })
-        }else{
-            activityStore.createActivity(activity).then(()=>{
-                Navigate(`/selectedActivity/${activityId}`) 
-            }) 
 
-        }
-   
-
-    }
-    const changeHandlar = (event:ChangeEvent<HTMLInputElement>)=>{
-        let {name, value}= event.target;
-        setActivity({...activity, [name]:value})
-    }
+  
     return(
         <div >
-            <form onSubmit={submitHandlar} > 
+
+            {
+             activityId?
+                   activityStore.activities.map((activity)=>{
+                    if(activity.id == activityId){
+                        return(
+                        
+                            <FormInput selectedActivity={activity}  key={activityId}/>
+                        )
+                    }
+                   })
+                    :
+                    <FormInput />
+                }
+
                
-            <div className="editFormContainer">
             
-            <input placeholder="Title" value={activity.title} name="title" onChange={changeHandlar} />
-            <input placeholder="Description" value={activity.description} name="description" onChange={changeHandlar}/>
-            <input placeholder="venue" value={activity.venue} name="venue" onChange={changeHandlar}/>
-            <input placeholder="venue" type="date" value={activity.date} name="date" onChange={changeHandlar}/>
-           
-           <div> 
-             <button onClick={()=>Navigate(`/selectedActivity/${activityId}`)} type="button" className="cancel">Cancel </button>
-            <button className="submitbtn" type="submit"> Submit </button>
-            </div>
-            </div>
-            </form>
+    
         </div>
     )
 
