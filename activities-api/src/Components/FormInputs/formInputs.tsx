@@ -41,13 +41,13 @@ const FormInput = observer(({selectedActivity}:prop)=>{
 
         <div className="editFormContainer">
         
-        <input placeholder="Title" value={selectedActivity?.title} name="title" onChange={changeHandlar} />
-        <input placeholder="Description" value={selectedActivity?.description} name="description" onChange={changeHandlar}/>
-        <input placeholder="venue" value={selectedActivity?.venue} name="venue" onChange={changeHandlar}/>
-        <input placeholder="venue" type="date" value={selectedActivity?.date} name="date" onChange={changeHandlar}/>
+        <input placeholder="Title" value={activity.title} name="title" onChange={changeHandlar} />
+        <input placeholder="Description" value={activity.description} name="description" onChange={changeHandlar}/>
+        <input placeholder="venue" value={activity.venue} name="venue" onChange={changeHandlar}/>
+        <input placeholder="venue" type="date" value={activity.date} name="date" onChange={changeHandlar}/>
        
        <div> 
-         <button onClick={()=>Navigate(`/selectedActivity/${selectedActivity?.id}`)} type="button" className="cancel">Cancel </button>
+         <button onClick={()=>Navigate(`/selectedActivity/${activity.id}`)} type="button" className="cancel">Cancel </button>
         <button className="submitbtn" type="submit"> Submit </button>
         </div>
         </div>
