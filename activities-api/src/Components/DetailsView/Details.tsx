@@ -51,12 +51,37 @@ const Details = observer(( )=>{
 
     return(
         <>
+
+
       {
         activityID ? 
           activityStore.activities.map((activity)=>{
-            return(
-              
-            )
+            if(activity.id == activityID){
+              return(
+                <div className= {"detailsContainter"}>
+            <img src={boardImg} />
+            <h3>{activity.title}</h3>
+            <p> {activity.date}</p>
+            <p>{activity.venue}</p>
+            <p>{activity.description}</p>
+
+            <div className="detailsbtns">
+    <button 
+    onClick={ ()=> Navigate(`/add/${activityID}`)} 
+    className="edit"
+    >  
+              Edit  </button>
+    <button 
+    onClick={activityStore.cancellActivity}
+    className="cancel">    
+    Cancel  
+    </button>
+
+  </div>
+  </div>
+              )
+            }
+           
           })
 
           :
