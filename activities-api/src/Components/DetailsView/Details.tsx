@@ -5,6 +5,7 @@ import EditForm from "../Edit-Forms/Edit-Forms";
 import { useEffect, useState } from "react";
 import { useStore } from "../../Store/store";
 import { useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 export type Activity= {
     id:string,
     description:string,
@@ -22,7 +23,7 @@ type prop ={
 }
 
 
-const Details = ( )=>{
+const Details = observer(( )=>{
 
     const [isEditOn, setIsEditOn] = useState(false);
     const {activityStore} = useStore()
@@ -33,6 +34,7 @@ const Details = ( )=>{
         setIsEditOn(false)
       }
  
+     
       useEffect(()=>{
         const chosenActivity = activityStore.activities.find(x=> x.id ==activityID)
         setSelectedActivity(chosenActivity)
@@ -49,37 +51,22 @@ const Details = ( )=>{
 
     return(
         <>
-        {
-            selectedActivity&& 
+      {
+        activityID ? 
+          activityStore.activities.map((activity)=>{
+            return(
+              
+            )
+          })
 
-            <div className= {"detailsContainter"}>
-            <img src={boardImg} />
-            <h3>{selectedActivity?.title}</h3>
-            <p> {selectedActivity?.date}</p>
-            <p>{selectedActivity?.venue}</p>
-            <p>{selectedActivity?.description}</p>
-
-            <div className="detailsbtns">
-    <button 
-    onClick={ ()=> Navigate(`/add/${activityID}`)} 
-    className="edit"
-    >  
-              Edit  </button>
-    <button 
-    onClick={activityStore.cancellActivity}
-    className="cancel">    
-    Cancel  
-    </button>
-
-            </div>
-
-        </div>
-        }
-
-   
-           </> 
+          :
+          <>
+          </>
+      }
+      
+        </> 
     )
-}
+})
 
 
 export default Details;
