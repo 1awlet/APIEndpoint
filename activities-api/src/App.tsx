@@ -15,6 +15,7 @@ import { Route, Router, Routes } from 'react-router-dom';
 import Test from './Components/test';
 import EditForm from './Components/Edit-Forms/Edit-Forms';
 import Details from './Components/DetailsView/Details';
+import Home from './Components/Home Page/Home';
 export type Activity= {
   id:string,
   description:string,
@@ -67,7 +68,7 @@ function App() {
 
       <Routes>
        <Route path='/' element={<Navbar />} > 
-       <Route index element={<Test />} />
+       <Route index element={<Home />} />
        <Route path='add/:activityId?' element={<EditForm />} />
        <Route path='selectedActivity/:activityID' element={<Details />}/>
        <Route path='/act' element={<DashBoard />} />
