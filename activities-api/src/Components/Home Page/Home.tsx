@@ -5,9 +5,15 @@ const Home = ()=>{
     const Navigate = useNavigate();
     return(
         <div    className="homeContainer">
-            <img src="#" />
+           <div> 
+           <img src="#" />
+           </div>
+          
+          <div> 
             <h2>Welcome to activity dashbord</h2>
+        
             <button onClick={()=>Navigate("/act")}>Take me to the dashboard</button>
+            </div>
         </div>
     )
 }
