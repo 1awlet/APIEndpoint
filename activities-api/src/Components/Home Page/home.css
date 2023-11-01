@@ -5,3 +5,13 @@
     align-items: center;
     justify-content: center;
 }
+
+
+
+.homeContainer button{
+    width: 230px;
+    height: 33px;
+    border: none;
+    font-size: 1.09rem;
+    background-color: lightskyblue;
+}
