@@ -1,0 +1,7 @@
+.homeContainer{
+    border: 1px solid red;
+    display: flex;
+    height: 100vw;
+    align-items: center;
+    justify-content: center;
+}
