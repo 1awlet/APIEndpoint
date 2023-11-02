@@ -1,7 +1,10 @@
+
 .homeContainer{
+
     border: 1px solid red;
     display: flex;
     height: 100vw;
+    max-height: 800px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
