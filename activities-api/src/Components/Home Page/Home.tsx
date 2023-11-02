@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "./home.css"
-
+import activityIcon from "../../Assets/Images/activity.svg";
 const Home = ()=>{
     const Navigate = useNavigate();
     return(
         <div    className="homeContainer">
            <div> 
-           <img src="#" />
+           <img src={activityIcon} />
            </div>
           
           <div> 
