@@ -44,8 +44,15 @@ export default class ActivityStore{
     }
 
 
-    get groupEdActivity (){
-        
+    get groupedActivity (){
+        return Object.entries(
+            this.activityByDate.reduce((activities, activity)=>{
+                const date =activity.date;
+                activities[date]= activities[date] ? [...activities[date], activity] : [activity]
+
+                return activities
+            })
+        )
     }
     setLoadingState = (state:boolean)=>{
         this.loadingActivities=state;
