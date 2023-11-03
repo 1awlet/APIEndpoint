@@ -39,7 +39,8 @@ export default class ActivityStore{
 
     
     get  activityByDate (){
-
+        return Array.from(this.activities.values()).sort((a,b)=>
+        Date.parse(a.date) - Date.parse(b.date));
     }
 
 
