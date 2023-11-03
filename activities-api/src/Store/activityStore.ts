@@ -37,6 +37,15 @@ export default class ActivityStore{
     }
 }
 
+    
+    get  activityByDate (){
+
+    }
+
+
+    get groupEdActivity (){
+        
+    }
     setLoadingState = (state:boolean)=>{
         this.loadingActivities=state;
     }
