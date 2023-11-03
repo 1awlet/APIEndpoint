@@ -1,15 +1,8 @@
 import {makeAutoObservable, runInAction} from "mobx"
-
+import { Activity } from "../App";
 import agent from "../api-agent/agent";
 import {v4 as uuid} from "uuid";
-export type Activity= {
-    id:string,
-    description:string,
-    title:string,
-    venue:string,
-    date:string
-  
-  }
+
 export default class ActivityStore{
     activities:Activity[] = [];
     loadingActivities=false;
@@ -51,7 +44,7 @@ export default class ActivityStore{
                 activities[date]= activities[date] ? [...activities[date], activity] : [activity]
 
                 return activities
-            })
+            },{} as {[key:string]: Activity[]})
         )
     }
     setLoadingState = (state:boolean)=>{
