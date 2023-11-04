@@ -29,37 +29,11 @@ export type Activity= {
 
 function App() {
   const {activityStore} = useStore()
-  const [filteredData, setFilteredData] = useState(activityStore.activities);
-  const [userInput,setUserInput]= useState("");
-  const [isLoading, setIsLoading]= useState(true);
-
 
   useEffect(()=>{
    activityStore.fetchActivities()
 
   },[activityStore])
-
-  const {activities} =activityStore;
-
-
-  const createOrEditActivityHandlar = async (activity:Activity)=>{
-        if(activity.id){
-      await agent.activitiesCrud.update(activity)
-
-  
-    }else{
-      activity.id= uuid();
-      await agent.activitiesCrud.add(activity)
-     
-    }
-
-  }
-  const DeleteActivity = (activityId:string)=>{
-    const updatedActivity = activities.filter((x)=> x.id !== activityId );
-    agent.activitiesCrud.delete(activityId)
-   
-  }
- 
 
 
 
