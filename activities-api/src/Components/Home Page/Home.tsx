@@ -12,7 +12,7 @@ const Home = () => {
             <div className="homeDetails">
                 <h2>Welcome to activity dashbord</h2>
 
-                <button onClick={() => Navigate("/act")}>Take me to the dashboard</button>
+                <button onClick={() => Navigate("/activities")}>Take me to the dashboard</button>
             </div>
         </div>
     )

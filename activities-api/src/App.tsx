@@ -46,7 +46,7 @@ function App() {
 
           <Route path='add/:activityId?' element={<EditForm />} />
           <Route path='selectedActivity/:activityID' element={<Details />} />
-          <Route path='/act' element={<DashBoard />} />
+          <Route path='/activities' element={<DashBoard />} />
         </Route>
       </Routes>
 

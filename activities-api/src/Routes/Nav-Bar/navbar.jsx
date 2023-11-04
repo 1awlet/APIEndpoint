@@ -28,7 +28,7 @@ const Navbar = observer(({createOrEditActivityHandlar})=>{
       </div>
 
       <ul className="navbar-menu">
-       <Link to={"/act"}> <li>Activitss</li> </Link>
+       <Link to={"/activities"}> <li>Activitss</li> </Link>
         <li>About</li>
         <Link to={"/add"}> <li className="libtns"> Add Activity </li> </Link>
       </ul>
