@@ -1,119 +1,119 @@
-import {makeAutoObservable, runInAction} from "mobx"
+import { makeAutoObservable, runInAction } from "mobx"
 import { Activity } from "../App";
 import agent from "../api-agent/agent";
-import {v4 as uuid} from "uuid";
+import { v4 as uuid } from "uuid";
 
-export default class ActivityStore{
-    activities:Activity[] = [];
-    loadingActivities=false;
+export default class ActivityStore {
+    activities: Activity[] = [];
+    loadingActivities = false;
     selectedActivity: Activity | undefined = undefined;
     editMode = false
-    constructor(){
+    constructor() {
         makeAutoObservable(this)
     }
 
-    fetchActivities = async ()=>{
+    fetchActivities = async () => {
         this.setLoadingState(true)
-    try {
-        const activities= await agent.activitiesCrud.list();
-    
-        activities.forEach((activity)=>{
-            activity.date=activity.date.split("T")[0]
-            this.activities.push(activity)
-        })
+        try {
+            const activities = await agent.activitiesCrud.list();
 
-        this.setLoadingState(false)
-        
-    } catch (error) {
-        console.log(error)
-        this.setLoadingState(false)
-    }
-}
+            activities.forEach((activity) => {
+                activity.date = activity.date.split("T")[0]
+                this.activities.push(activity)
+            })
 
-    
-    get  activityByDate (){
-        return Array.from(this.activities.values()).sort((a,b)=>
-        Date.parse(a.date) - Date.parse(b.date));
+            this.setLoadingState(false)
+
+        } catch (error) {
+            console.log(error)
+            this.setLoadingState(false)
+        }
     }
 
 
-    get groupedActivity (){
+    get activityByDate() {
+        return Array.from(this.activities.values()).sort((a, b) =>
+            Date.parse(a.date) - Date.parse(b.date));
+    }
+
+
+    get groupedActivity() {
         return Object.entries(
-            this.activityByDate.reduce((activities, activity)=>{
-                const date =activity.date;
-                activities[date]= activities[date] ? [...activities[date], activity] : [activity]
+            this.activityByDate.reduce((activities, activity) => {
+                const date = activity.date;
+                activities[date] = activities[date] ? [...activities[date], activity] : [activity]
 
                 return activities
-            },{} as {[key:string]: Activity[]})
+            }, {} as { [key: string]: Activity[] })
         )
     }
-    setLoadingState = (state:boolean)=>{
-        this.loadingActivities=state;
+    setLoadingState = (state: boolean) => {
+        this.loadingActivities = state;
     }
-    setSelectedActivity = (id:string)=>{
+    setSelectedActivity = (id: string) => {
         console.log(id)
-        this.selectedActivity= this.activities.find((activity)=> activity.id == id);
+        this.selectedActivity = this.activities.find((activity) => activity.id == id);
     }
 
-    cancellActivity = ()=>{
-        this.selectedActivity= undefined;
+    cancellActivity = () => {
+        this.selectedActivity = undefined;
     }
 
-    openForm = (id?:string)=>{
+    openForm = (id?: string) => {
         id ? this.setSelectedActivity(id) : this.cancellActivity()
-        this.editMode=true
+        this.editMode = true
     }
 
-    closeForm= ()=>{
-        this.editMode=false
+    closeForm = () => {
+        this.editMode = false
     }
 
-    openEditMode = ()=>{
-        this.editMode=true;
+    openEditMode = () => {
+        this.editMode = true;
     }
 
-    createActivity = async (activity:Activity)=>{
-        activity.id= uuid()
+    createActivity = async (activity: Activity) => {
+        activity.id = uuid()
         this.setLoadingState(true)
         try {
             await agent.activitiesCrud.add(activity)
-            runInAction(()=>{
+            runInAction(() => {
                 this.activities.push(activity)
-                this.selectedActivity=activity;
-                this.editMode=false;
+                this.selectedActivity = activity;
+                this.editMode = false;
                 this.setLoadingState(false)
             })
         } catch (error) {
             console.log(Error)
-            this.selectedActivity=undefined;
+            this.selectedActivity = undefined;
         }
     }
 
 
-    updateActivity = async(activity:Activity)=>{
+    updateActivity = async (activity: Activity) => {
         this.setLoadingState(true)
         try {
             agent.activitiesCrud.update(activity);
-            runInAction(()=>{
-                this.activities=[...this.activities.filter((x)=>x.id != activity.id), activity]
-                this.editMode=false;
-                this.selectedActivity=activity;
+            runInAction(() => {
+                this.activities = [...this.activities.filter((x) => x.id != activity.id), activity]
+                this.editMode = false;
+                this.selectedActivity = activity;
                 this.setLoadingState(false)
             })
         } catch (error) {
             console.log(error)
-        
+
         }
     }
 
-    deleteActivity = async(id:string)=>{
+    deleteActivity = async (id: string) => {
         this.setLoadingState(true)
         try {
             agent.activitiesCrud.delete(id);
-            runInAction(()=>{
-                this.activities=this.activities.filter(x => x.id != id)
-                this.editMode=false;
-                this.selectedActivity=undefined;
+            runInAction(() => {
+                this.activities = this.activities.filter(x => x.id != id)
+                this.editMode = false;
+                this.selectedActivity = undefined;
                 this.setLoadingState(false)
             })
         } catch (error) {
