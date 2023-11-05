@@ -31,7 +31,7 @@ const  Activities = observer(({activities}: prop)=>  {
     }
   
     return (
-        <div>
+        <div className="Allactivities-container">
           
             {
             activities.map((item) => (
