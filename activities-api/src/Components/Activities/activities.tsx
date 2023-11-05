@@ -6,14 +6,7 @@ import Details from "../DetailsView/Details";
 import EditForm from "../Edit-Forms/Edit-Forms";
 import { useStore } from "../../Store/store";
 import { observer } from "mobx-react-lite";
-export type Activity= {
-    id:string,
-    description:string,
-    title:string,
-    venue:string,
-    date:string
-  
-  }
+import { Activity } from "../../App";
 type prop = {
     activities: Activity[],
 
@@ -22,6 +15,7 @@ type prop = {
 
 
 const  Activities = observer(({activities}: prop)=>  {
+    console.log(activities)
     const [filteredData, setFilteredData] = useState(activities);
     const [userInput, setUserInput] = useState("");
     const [selectedEvent, setSelectedEvent] = useState<Activity | undefined>(undefined);
