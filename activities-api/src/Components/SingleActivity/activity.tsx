@@ -25,13 +25,22 @@ const SingleActivity = observer(({ activity }: Props) => {
   return (
 
     <div key={id} className="activity-container">
+     
+     <div className="actvityHeader"> 
       <h2 className="title">{title}</h2>
-      <p className="date-added">{date}</p>
-      <p className="description">{description}</p>
+      </div>
 
+      <div className="activityDetails"> 
+      <p className="date-added">{date}</p>
+    
+      <p className="description">{description}</p>
+      </div>
+
+      <div className="actvityDescription">
       <button onClick={()=> Navigate(`/selectedActivity/${id}`) } className="read-more-button">Read More</button>
       <button className="deleteButton" onClick={()=> activityStore.deleteActivity(id)}>
         Remove </button>
+      </div>
     </div>
 
 
