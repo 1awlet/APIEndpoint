@@ -27,12 +27,13 @@ const SingleActivity = observer(({ activity }: Props) => {
     <div key={id} className="activity-container">
 
       <div className="actvityHeader">
-        <div>
+        <div className="activityImageContainer">
           <img src={UserIcon} />
         </div>
         <div>
           <h2 className="title">{title}</h2>
-          
+          <p>Posted by me</p>
+
         </div>
       </div>
 

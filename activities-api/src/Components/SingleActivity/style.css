@@ -2,10 +2,17 @@
 
 
 .actvityHeader{
-  border: 1px solid red;
+
   display: flex;
   width: 500px;
 }
-.actvityHeader img{
-  width: 40px;
+.activityImageContainer img{
+  width: 55px;
+  border-radius: 33%;
+  border: 1px solid gray;
+
+}
+.activityImageContainer{
+  width: 70px;
+
 }
