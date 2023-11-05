@@ -1,1 +1,11 @@
 
+
+
+.actvityHeader{
+  border: 1px solid red;
+  display: flex;
+  width: 500px;
+}
+.actvityHeader img{
+  width: 40px;
+}
